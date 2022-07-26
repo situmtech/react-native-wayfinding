@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.reactnativesitumwayfindingplugin.nativeUIComponents.MapView.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:minHeight="150dp"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:id="@+id/map_view">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/map_container">
+
+    <FrameLayout
+      android:id="@+id/maps_library_target"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.reactnativesitumwayfindingplugin.nativeUIComponents.MapView.MapView>
