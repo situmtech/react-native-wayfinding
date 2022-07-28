@@ -51,6 +51,8 @@ export default function App() {
       user="SITUM_USER" 
       apikey="SITUM_APIKEY" 
       googleApikey="GOOGLE_MAPS_APIKEY"
+      buildingId = ""
+
       onMapReadyCallback={this.onMapReady}
       onFloorChangeCallback={this.onFloorChange}
       onPoiSelectedCallback={this.onPoiSelected}

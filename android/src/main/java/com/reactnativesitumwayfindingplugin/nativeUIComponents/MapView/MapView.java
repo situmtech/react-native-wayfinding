@@ -3,6 +3,7 @@ package com.reactnativesitumwayfindingplugin.nativeUIComponents.MapView;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
@@ -44,6 +45,8 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   private String apikey = "";
   private String googleApikey = "";
 
+  private String buildingId = "";
+
   private LibrarySettings librarySettings;
   private SitumMapsLibrary mapsLibrary;
   public Activity activity = null;
@@ -74,9 +77,6 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
         librarySettings = new LibrarySettings();
 
         librarySettings.setApiKey(user, apikey);
-        // librarySettings.setGoogleMap();
-        // Log.d(TAG, "onFinishInflate: views " + getResources().getResourceName( this.getId()) );
-
 
         mapsLibrary = new SitumMapsLibrary(v.findViewById(R.id.map_container).findViewById(R.id.maps_library_target).getId(), (FragmentActivity) context.getCurrentActivity(), librarySettings);
         mapsLibrary.setSitumMapsListener(MapView.this);
@@ -84,6 +84,7 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
         mapsLibrary.setOnFloorChangeListener(MapView.this);
         mapsLibrary.setOnPoiSelectionListener(MapView.this);
         mapsLibrary.setOnNavigationListener(MapView.this);
+
         mapsLibrary.load();
 
         status = true;
@@ -136,6 +137,8 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
 
   public void setGoogleApikey(String googleApikey) { this.googleApikey = googleApikey; }
 
+  public void setBuildingId(String buildingId) { this.buildingId = buildingId; }
+
   public void onClick() {
         /*
         WritableMap event = Arguments.createMap();
@@ -173,6 +176,9 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   @Override
   public void onMapReady() {
     Log.d("MapView", "onMapReady: ");
+
+    mapsLibrary.enableOneBuildingMode(buildingId);
+
     WritableMap event = Arguments.createMap();
 
     event.putString("message", "hello world to callbacks");

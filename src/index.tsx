@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { NativeModules, Platform } from 'react-native';
 
 const LINKING_ERROR =
@@ -29,48 +31,30 @@ export class MapView extends React.PureComponent {
   
   constructor(props:any) {
     super(props);
-    this._onMapReady = this._onMapReady.bind(this);
   }
 
-  static propTypes = {
-    user: PropTypes.string.isRequired,
-    apikey: PropTypes.string.isRequired,
-    googleApiKey: PropTypes.string.isRequired,
-    onMapReady: PropTypes.func
-  }
-
-  _onMapReady = (event:any) => {
-    console.log("Received on map ready message from native");
-    if (!this.props.onMapReady) {
-      return;
+  static get propTypes() {
+    return {
+      user: PropTypes.string.isRequired,
+      apikey: PropTypes.string.isRequired,
+      googleApikey: PropTypes.string.isRequired,
+      buildingId: PropTypes.string.isRequired,
+      onMapReady: PropTypes.func,
+      onFloorChange: PropTypes.func,
+      onPoiSelected: PropTypes.func,
+      onPoiDeselected: PropTypes.func,
+      onNavigationRequested: PropTypes.func,
+      onNavigationError: PropTypes.func,
+      onNavigationFinished: PropTypes.func
     }
-
-    this.props.onMapReady(event.nativeEvent);
   }
-  /*
-  _onClick = (event) => {
-        if (!this.props.onClick) {
-            return;
-        }
-
-        // process raw event
-        this.props.onClick(event.nativeEvent);
-    }
-    */
+    
 
     render() {
         return <RCTMapView 
         {...this.props} 
-        onMapReady={this._onMapReady}/> 
-        //     {{/*onClick={this._onClick}*/}}
-        // return <Text>Hello World 3</Text>
+        /> 
     }
     
     
 }
-
-
-
-
-
-// module.exports = MapView;

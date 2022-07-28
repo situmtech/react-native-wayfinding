@@ -34,7 +34,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
      
      let credentials = Credentials(user: user as String, apiKey:  apikey as String, googleMapsApiKey: googleApikey as String)
      
-      let buildingId = "9601"
+      let buildingId = buildingId as String
       let settings = LibrarySettings.Builder()
           .setCredentials(credentials: credentials)
           .setBuildingId(buildingId: buildingId)
@@ -93,8 +93,17 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       }
   }
     
+    @objc var buildingId : NSString = "" {
+      didSet {
+        print("buildingId set to \(self.buildingId)")
+          checkAndLoad()
+
+      }
+    }
+    
+    
     func checkAndLoad() {
-        initialized = self.user != "" && self.apikey != "" && self.googleApikey != ""
+        initialized = self.user != "" && self.apikey != "" && self.googleApikey != "" && buildingId != ""
         if initialized {
             setupView()
         }
@@ -103,13 +112,8 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
   @objc var onClick: RCTBubblingEventBlock?
    
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-      guard let onClick = self.onClick else { return }
-   
-      let params: [String : Any] = ["value1":"react demo","value2":1]
-      // onClick(params)
       
       
-      print("Hello user: \(user), with apikey: \(apikey) and google apikey: \(googleApikey)")
       
   }
     

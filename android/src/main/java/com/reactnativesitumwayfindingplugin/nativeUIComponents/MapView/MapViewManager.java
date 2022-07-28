@@ -51,6 +51,11 @@ public class MapViewManager extends SimpleViewManager<MapView> {
     view.setGoogleApikey(googleApikey);
   }
 
+  @ReactProp(name = "buildingId")
+  public void setBuildingId(MapView view, String buildingId) {
+    view.setBuildingId(buildingId);
+  }
+
   public Map getExportedCustomBubblingEventTypeConstants() {
     String eventName = "onClickEvent";
     String propName = "onClick";
