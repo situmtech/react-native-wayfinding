@@ -23,7 +23,7 @@ export function multiply(a: number, b: number): Promise<number> {
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { requireNativeComponent } from 'react-native'; // , , Text
+import { requireNativeComponent } from 'react-native';
 
 var RCTMapView = requireNativeComponent('RCTMapView'); // , MapView, {}
 
