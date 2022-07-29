@@ -35,13 +35,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/situm-abarros/situm-react-native-wayfinding",
-  "author": "Abraham Barros <mobile@situm.com> (https://github.com/situm-abarros/situm-react-native-wayfinding)",
+  "repository": "https://github.com/situmtech/situm-react-native-wayfinding",
+  "author": "Situm Technologies <mobile@situm.com> (https://github.com/situmtech/situm-react-native-wayfinding)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/situm-abarros/situm-react-native-wayfinding/issues"
+    "url": "https://github.com/situmtech/situm-react-native-wayfinding/issues"
   },
-  "homepage": "https://github.com/situm-abarros/situm-react-native-wayfinding#readme",
+  "homepage": "https://github.com/situmtech/situm-react-native-wayfinding#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
