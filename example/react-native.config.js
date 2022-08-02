@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   dependencies: {
-    'react-native-situm-wayfinding-plugin': {
+    '@situm/react-native-wayfinding': {
       root: path.join(__dirname, '..'),
     },
   },

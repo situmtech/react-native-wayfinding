@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View } from 'react-native';
-import { MapView } from 'react-native-situm-wayfinding-plugin';
+import { MapView } from '@situm/react-native-wayfinding';
 
 export default function App() {
 

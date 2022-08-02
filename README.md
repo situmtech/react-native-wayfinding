@@ -1,4 +1,4 @@
-# react-native-situm-wayfinding-plugin
+# @situm/react-native-wayfinding
 Integrate plug&play navigation experience with floorplans, POIs, routes and turn-by-turn directions in no time.
 
 ## Introduction <a name="introduction"></a>
@@ -46,7 +46,7 @@ yarn add https://github.com/situmtech/situm-react-native-wayfinding.git
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { MapView } from 'react-native-situm-wayfinding-plugin';
+import { MapView } from '@situm/react-native-wayfinding';
 
 export default function App() {
 

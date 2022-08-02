@@ -51,7 +51,7 @@ Remember to add tests for your change if possible. Run the unit tests by:
 ```sh
 yarn test
 ```
-To edit the Objective-C files, open `example/ios/SitumWayfindingPluginExample.xcworkspace` in XCode and find the source files at `Pods > Development Pods > react-native-situm-wayfinding-plugin`.
+To edit the Objective-C files, open `example/ios/SitumWayfindingPluginExample.xcworkspace` in XCode and find the source files at `Pods > Development Pods > situm-react-native-wayfinding`.
 
 To edit the Kotlin files, open `example/android` in Android studio and find the source files at `reactnativesitumwayfindingplugin` under `Android`.
 ### Commit message convention
