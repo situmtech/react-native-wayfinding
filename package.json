@@ -13,7 +13,7 @@
     "android",
     "ios",
     "cpp",
-    "situm-react-native-wayfinding.podspec",
+    "react-native-wayfinding.podspec",
     "!lib/typescript/example",
     "!android/build",
     "!ios/build",
