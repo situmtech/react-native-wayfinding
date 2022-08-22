@@ -23,6 +23,7 @@ import com.reactnativesitumwayfindingplugin.R;
 
 import es.situm.sdk.model.cartography.Building;
 import es.situm.sdk.model.cartography.Floor;
+import es.situm.sdk.model.cartography.BuildingInfo;
 import es.situm.sdk.model.cartography.Poi;
 import es.situm.wayfinding.LibrarySettings;
 import es.situm.wayfinding.OnFloorChangeListener;
@@ -35,6 +36,7 @@ import es.situm.wayfinding.SitumMapsListener;
 import es.situm.wayfinding.navigation.Navigation;
 import es.situm.wayfinding.navigation.NavigationError;
 import es.situm.wayfinding.navigation.OnNavigationListener;
+import es.situm.sdk.SitumSdk;
 
 public class MapView extends RelativeLayout implements SitumMapsListener, OnUserInteractionListener, OnFloorChangeListener, OnPoiSelectionListener, OnNavigationListener {
 
@@ -177,10 +179,21 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   public void onMapReady() {
     Log.d("MapView", "onMapReady: ");
 
-    mapsLibrary.enableOneBuildingMode(buildingId);
+    SitumSdk.init(context.getCurrentActivity());
+    SitumSdk.communicationManager().fetchBuildingInfo(buildingId, new es.situm.sdk.utils.Handler<BuildingInfo>() {
+      @Override
+      public void onSuccess(BuildingInfo buildingInfo) {
+        Building selectedBuilding = buildingInfo.getBuilding();
+        mapsLibrary.centerBuilding(selectedBuilding);
+      }
+
+      @Override
+      public void onFailure(es.situm.sdk.error.Error error) {
+        Log.e(TAG, "Error with msg = [" + error.getMessage() + "]" + " and code = [" + error.getCode() + "]");
+      }
+    });
 
     WritableMap event = Arguments.createMap();
-
     event.putString("message", "hello world to callbacks");
     ReactContext reactContext = (ReactContext)getContext();
     reactContext
