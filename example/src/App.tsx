@@ -35,18 +35,18 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.mapview} 
-      user="SITUM_USER" 
-      apikey="SITUM_APIKEY" 
-      googleApikey="GOOGLE_MAPS_APIKEY"
-      buildingId="PUT_THE_BUILDING_IDENTIFIER_HERE"
-      onMapReadyCallback={this.onMapReady}
-      onFloorChangeCallback={this.onFloorChange}
-      onPoiSelectedCallback={this.onPoiSelected}
-      onPoiDeselectedCallback={this.onPoiDeselected}
-      onNavigationRequestedCallback={this.onNavigationRequested}
-      onNavigationError={this.onNavigationError}
-      onNavigationfinished={this.onNavigationFinished}
+      <MapView style={styles.mapview}
+        user="SITUM_USER"
+        apikey="SITUM_APIKEY"
+        googleApikey="GOOGLE_MAPS_APIKEY"
+        buildingId="PUT_THE_BUILDING_IDENTIFIER_HERE"
+        onMapReadyCallback={this.onMapReady}
+        onFloorChangeCallback={this.onFloorChange}
+        onPoiSelectedCallback={this.onPoiSelected}
+        onPoiDeselectedCallback={this.onPoiDeselected}
+        onNavigationRequestedCallback={this.onNavigationRequested}
+        onNavigationError={this.onNavigationError}
+        onNavigationfinished={this.onNavigationFinished}
       />
     </View>
   );
