@@ -2,27 +2,20 @@ package com.reactnativesitumwayfindingplugin.nativeUIComponents.MapView;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.google.android.gms.maps.model.LatLng;
 import com.reactnativesitumwayfindingplugin.R;
-
-import java.util.ArrayList;
+import com.reactnativesitumwayfindingplugin.nativeUIComponents.ReactMessage.ReactMessage;
+import com.reactnativesitumwayfindingplugin.nativeUIComponents.ReactMessage.ReactMessageManager;
 
 import es.situm.sdk.SitumSdk;
 import es.situm.sdk.model.cartography.Building;
@@ -33,8 +26,6 @@ import es.situm.wayfinding.LibrarySettings;
 import es.situm.wayfinding.OnFloorChangeListener;
 import es.situm.wayfinding.OnPoiSelectionListener;
 import es.situm.wayfinding.OnUserInteractionListener;
-import es.situm.wayfinding.SitumMap;
-import es.situm.wayfinding.SitumMapView;
 import es.situm.wayfinding.SitumMapsLibrary;
 import es.situm.wayfinding.SitumMapsListener;
 import es.situm.wayfinding.actions.ActionsCallback;
@@ -117,21 +108,6 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
     this.buildingId = buildingId;
   }
 
-  public void onClick() {
-
-    /*
-     * WritableMap event = Arguments.createMap();
-     * 
-     * event.putString("value1","react demo");
-     * event.putInt("value2",1);
-     * 
-     * ReactContext reactContext = (ReactContext)getContext();
-     * reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(),
-     * "onClickEvent", event);
-     */
-
-  }
-
   // public void onMapReadyCallback()
 
   public MapView(Context context) {
@@ -175,11 +151,11 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   public void onSuccess() {
     Log.d(TAG, "onSuccess: received");
 
-    if (!buildingId.equals("")) {
+    if (buildingId != null && !"-1".equals(buildingId) && !"".equals(buildingId)) {
       centerBuilding(buildingId);
     } else {
-      sendReactMessage("onMapReadyCallback",
-          new ReactMessage("message", "No build mode"));
+      ReactMessageManager.sendReactMessage(MapView.this, ReactMessage.MAP_READY_CALLBACK,
+          new ReactMessage(ReactMessage.MESSAGE_ID, "No build mode"));
     }
 
   }
@@ -195,17 +171,17 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   @Override
   public void onPoiSelected(Poi poi, Floor floor, Building building) {
 
-    sendReactMessage("onPoiSelectedCallback",
-        new ReactMessage("poi", poi.getIdentifier()),
-        new ReactMessage("floor", floor.getIdentifier()),
-        new ReactMessage("building", building.getIdentifier()));
+    ReactMessageManager.sendReactMessage(MapView.this, ReactMessage.POI_SELECTED_CALLBACK,
+        new ReactMessage(ReactMessage.POI_ID, poi.getIdentifier()),
+        new ReactMessage(ReactMessage.FLOOR_ID, floor.getIdentifier()),
+        new ReactMessage(ReactMessage.BUILDING_ID, building.getIdentifier()));
   }
 
   @Override
   public void onPoiDeselected(Building building) {
 
-    sendReactMessage("onPoiDeselectedCallback",
-        new ReactMessage("building", building.getIdentifier()));
+    ReactMessageManager.sendReactMessage(MapView.this, ReactMessage.POI_DESELECTED_CALLBACK,
+        new ReactMessage(ReactMessage.BUILDING_ID, building.getIdentifier()));
   }
   // endregion
 
@@ -213,23 +189,23 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   @Override
   public void onNavigationRequested(Navigation navigation) {
 
-    sendReactMessage("onNavigationRequestedCallback",
-        new ReactMessage("navigationStatus", navigation.getStatus().name()));
+    ReactMessageManager.sendReactMessage(MapView.this, ReactMessage.NAVIGATION_REQUESTED_CALLBACK,
+        new ReactMessage(ReactMessage.NAVIGATION_STATUS_ID, navigation.getStatus().name()));
   }
 
   @Override
   public void onNavigationError(Navigation navigation, NavigationError navigationError) {
 
-    sendReactMessage("onNavigationErrorCallback",
-        new ReactMessage("navigationStatus", navigation.getStatus().name()),
-        new ReactMessage("error", navigationError.getMessage()));
+    ReactMessageManager.sendReactMessage(MapView.this, ReactMessage.NAVIGATION_ERROR_CALLBACK,
+        new ReactMessage(ReactMessage.NAVIGATION_STATUS_ID, navigation.getStatus().name()),
+        new ReactMessage(ReactMessage.ERROR_ID, navigationError.getMessage()));
   }
 
   @Override
   public void onNavigationFinished(Navigation navigation) {
 
-    sendReactMessage("onNavigationFinishedCallback",
-        new ReactMessage("navigationStatus", navigation.getStatus().name()));
+    ReactMessageManager.sendReactMessage(MapView.this, ReactMessage.NAVIGATION_FINISHED_CALLBACK,
+        new ReactMessage(ReactMessage.NAVIGATION_STATUS_ID, navigation.getStatus().name()));
   }
 
   // endregion
@@ -239,10 +215,10 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   public void onFloorChanged(Floor from, Floor to, Building building) {
     Log.d(TAG, "onFloorChanged: ");
 
-    sendReactMessage("onFloorChangeCallback",
-        new ReactMessage("from", from.getIdentifier()),
-        new ReactMessage("to", to.getIdentifier()),
-        new ReactMessage("building", building.getIdentifier()));
+    ReactMessageManager.sendReactMessage(MapView.this, ReactMessage.FLOOR_CHANGED_CALLBACK,
+        new ReactMessage(ReactMessage.FROM_ID, from.getIdentifier()),
+        new ReactMessage(ReactMessage.TO_ID, to.getIdentifier()),
+        new ReactMessage(ReactMessage.BUILDING_ID, building.getIdentifier()));
   }
 
   // end region
@@ -255,11 +231,11 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
     mapsLibrary = new SitumMapsLibrary(
         this.findViewById(R.id.map_container).findViewById(R.id.maps_library_target).getId(),
         (FragmentActivity) context.getCurrentActivity(), librarySettings);
-    mapsLibrary.setSitumMapsListener(MapView.this);
-    mapsLibrary.setUserInteractionsListener(MapView.this);
-    mapsLibrary.setOnFloorChangeListener(MapView.this);
-    mapsLibrary.setOnPoiSelectionListener(MapView.this);
-    mapsLibrary.setOnNavigationListener(MapView.this);
+    mapsLibrary.setSitumMapsListener(this);
+    mapsLibrary.setUserInteractionsListener(this);
+    mapsLibrary.setOnFloorChangeListener(this);
+    mapsLibrary.setOnPoiSelectionListener(this);
+    mapsLibrary.setOnNavigationListener(this);
 
     mapsLibrary.load();
   }
@@ -273,36 +249,19 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
         mapsLibrary.centerBuilding(selectedBuilding, new ActionsCallback() {
           @Override
           public void onActionConcluded() {
-            sendReactMessage("onMapReadyCallback", new ReactMessage("message", "Building id: " + buildingId));
+            ReactMessageManager.sendReactMessage(MapView.this, ReactMessage.MAP_READY_CALLBACK,
+                new ReactMessage(ReactMessage.MESSAGE_ID, "Building id: " + buildingId));
           }
         });
       }
 
       @Override
       public void onFailure(Error error) {
-        sendReactMessage("onMapReadyCallback", new ReactMessage("message", error.getMessage()));
+        ReactMessageManager.sendReactMessage(MapView.this, ReactMessage.MAP_READY_CALLBACK,
+            new ReactMessage(ReactMessage.MESSAGE_ID, error.getMessage()));
       }
     });
 
   }
 
-  private void sendReactMessage(@NonNull String callback, @NonNull ReactMessage... reactMessages) {
-    WritableMap event = Arguments.createMap();
-    for (ReactMessage rm : reactMessages) {
-      event.putString(rm.id, rm.content);
-    }
-    ReactContext reactContext = (ReactContext) getContext();
-    reactContext.getJSModule(RCTEventEmitter.class)
-        .receiveEvent(getId(), callback, event);
-  }
-
-  private class ReactMessage {
-    private String id;
-    private String content;
-
-    private ReactMessage(String id, String content) {
-      this.id = id;
-      this.content = content;
-    }
-  }
 }
