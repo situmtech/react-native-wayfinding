@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import MapView from '@situm/react-native-wayfinding';
+import { MapView } from '@situm/react-native-wayfinding';
 
 const styles = StyleSheet.create({
   container: {

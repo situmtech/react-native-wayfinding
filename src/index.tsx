@@ -39,6 +39,6 @@ export interface MapViewProps {
   style?: any;
 }
 
-const MapView: React.FC<MapViewProps> = (props) => <RCTMapView {...props} />;
-
-export default MapView;
+export const MapView: React.FC<MapViewProps> = (props) => (
+  <RCTMapView {...props} />
+);
