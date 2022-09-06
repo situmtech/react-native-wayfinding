@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { NativeModules, Platform } from 'react-native';
 import React from 'react';
 import { requireNativeComponent } from 'react-native';
