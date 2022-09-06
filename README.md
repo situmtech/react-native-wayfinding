@@ -1,5 +1,21 @@
-# @situm/react-native-wayfinding
-Integrate plug&play navigation experience with floorplans, POIs, routes and turn-by-turn directions in no time.
+<p align="center"> <img width="233" src="https://situm.com/wp-content/themes/situm/img/logo-situm.svg" style="margin-bottom:1rem" /> <h1 align="center">@situm/react-native-wayfinding</h1> </p>
+
+<p align="center" style="text-align:center">
+
+Integrate plug&play navigation experience with floorplans, POIs, routes and turn-by-turn directions in no time. with the power of
+[SITUM](https://www.situm.com/).
+
+</p>
+
+<div align="center" style="text-align:center">
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+![Latest version:](https://img.shields.io/npm/v/@situm/sdk-js/latest)
+![Node compatibility:](https://img.shields.io/node/v/@situm/sdk-js)
+[![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
+![React Native](https://img.shields.io/badge/react--native%40lastest-0.68.2-blueviolet)
+
+</div>
 
 ## Introduction <a name="introduction"></a>
 
