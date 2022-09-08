@@ -108,7 +108,7 @@ export default function App() {
       onPoiDeselectedCallback={this.onPoiDeselected}
       onNavigationRequestedCallback={this.onNavigationRequested}
       onNavigationError={this.onNavigationError}
-      onNavigationfinished={this.onNavigationFinished}
+      onNavigationFinished={this.onNavigationFinished}
       />
     </View>
   );
