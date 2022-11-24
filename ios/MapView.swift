@@ -42,8 +42,12 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       
       
       
-      let viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
+      var viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
       
+     if (self.iOSViewIndex != "") {
+         viewController = viewController.children.last!.children[self.iOSViewIndex.integerValue]
+     }
+
       
        let library = SitumMapsLibrary.init(containedBy: self, controlledBy: viewController, withSettings: settings )
      library.setOnMapReadyListener(listener: self)
@@ -59,15 +63,18 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       } catch {
           print("User creation failed with error:")
       }
-     
-     print("Hello user: \(user), with apikey: \(apikey) and google apikey: \(googleApikey)")
-
    }
     
     @objc var user: NSString = "" {
       didSet {
         print("User set to \(self.user)")
           checkAndLoad()
+      }
+    }
+
+    @objc var iOSViewIndex: NSString = "" {
+      didSet {
+        print("iOSViewIndex set to \(self.iOSViewIndex)")
       }
     }
     
@@ -210,6 +217,10 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
 
         let params: [String: Any] = ["navigationStatus": navigation.status];
         onNavigationFinishedCallback(params)
+    }
+
+    func onNavigationStarted(navigation: SitumWayfinding.Navigation) {
+        print("onNavigationStarted: \(navigation)")
     }
     
 }

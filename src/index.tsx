@@ -37,6 +37,7 @@ export interface MapViewProps {
   onNavigationError?: (event: any) => void;
   onNavigationFinished?: (event: any) => void;
   style?: any;
+  iOSViewIndex?: string;
 }
 
 export const MapView: React.FC<MapViewProps> = (props) => (
