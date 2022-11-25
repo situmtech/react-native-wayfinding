@@ -40,10 +40,12 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           .setBuildingId(buildingId: buildingId)
           .build()
       
-      
-      
-      let viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
-      
+     var viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
+     
+     if (self.iOSMapViewIndex != "" && viewController.children.count > 0) {
+        viewController = viewController.children.last!.children[self.iOSMapViewIndex.integerValue]
+    }
+
       
        let library = SitumMapsLibrary.init(containedBy: self, controlledBy: viewController, withSettings: settings )
      library.setOnMapReadyListener(listener: self)
@@ -59,9 +61,6 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       } catch {
           print("User creation failed with error:")
       }
-     
-     print("Hello user: \(user), with apikey: \(apikey) and google apikey: \(googleApikey)")
-
    }
     
     @objc var user: NSString = "" {
@@ -100,6 +99,12 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
 
       }
     }
+
+    @objc var iOSMapViewIndex: NSString = "" {
+          didSet {
+            print("iOSMapViewIndex set to \(self.iOSMapViewIndex)")
+          }
+        }
     
     
     func checkAndLoad() {
@@ -210,6 +215,15 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
 
         let params: [String: Any] = ["navigationStatus": navigation.status];
         onNavigationFinishedCallback(params)
+    }
+
+    @objc var onNavigationStartedCallback: RCTBubblingEventBlock?
+
+    func onNavigationStarted(navigation: SitumWayfinding.Navigation) {
+        print("onNavigationStarted: \(navigation)")
+
+        // TODO: Connect callback
+
     }
     
 }

@@ -22,5 +22,6 @@ RCT_EXPORT_VIEW_PROPERTY(onPoiDeselectedCallback, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onNavigationRequestedCallback, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onNavigationErrorCallback, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onNavigationFinishedCallback, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(iOSMapViewIndex, NSString)
 
 @end
