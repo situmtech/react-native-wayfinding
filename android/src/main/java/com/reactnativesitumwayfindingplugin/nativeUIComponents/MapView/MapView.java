@@ -51,6 +51,10 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   private int maxZoom = -1;
   private int initialZoom = -1;
 
+  private boolean enablePoiClustering = true;
+  private boolean showPoiNames = true;
+  private boolean useRemoteConfig = true;
+
   private LibrarySettings librarySettings;
   private SitumMapsLibrary mapsLibrary;
   public Activity activity = null;
@@ -111,6 +115,18 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
 
   public void setBuildingId(String buildingId) {
     this.buildingId = buildingId;
+  }
+
+  public void setEnablePoiClustering(Boolean enablePoiClustering) {
+    this.enablePoiClustering = enablePoiClustering;
+  }
+
+  public void setShowPoiNames(Boolean showPoiNames) {
+    this.showPoiNames = showPoiNames;
+  }
+
+  public void setUseRemoteConfig(Boolean useRemoteConfig) {
+    this.useRemoteConfig = useRemoteConfig;
   }
 
   public void setMinZoom(int z) {
@@ -249,6 +265,10 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
     librarySettings = new LibrarySettings();
 
     librarySettings.setApiKey(user, apikey);
+
+    librarySettings.setEnablePoiClustering(enablePoiClustering);
+    librarySettings.setShowPoiNames(showPoiNames);
+    librarySettings.setUseRemoteConfig(useRemoteConfig);
 
     if (maxZoom > 0) {
       librarySettings.setMaxZoom(maxZoom);
