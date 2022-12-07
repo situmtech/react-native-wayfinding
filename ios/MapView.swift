@@ -68,14 +68,12 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     
     @objc var user: NSString = "" {
       didSet {
-        print("User set to \(self.user)")
           checkAndLoad()
       }
     }
     
     @objc var apikey: NSString = "" {
       didSet {
-        print("apikey set to \(self.apikey)")
           checkAndLoad()
 
       }
@@ -83,7 +81,6 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     
     @objc var googleApikey : NSString = "" {
       didSet {
-        print("googleApikey set to \(self.googleApikey)")
           checkAndLoad()
 
       }
