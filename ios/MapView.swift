@@ -38,6 +38,9 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       let settings = LibrarySettings.Builder()
           .setCredentials(credentials: credentials)
           .setBuildingId(buildingId: buildingId)
+          .setShowPoiNames(showPoiNames: showPoiNames)
+          .setUseRemoteConfig(useRemoteConfig: useRemoteConfig)
+          .setEnablePoiClustering(enablePoisClustering: enablePoiClustering)
           .build()
       
      var viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
@@ -65,14 +68,12 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     
     @objc var user: NSString = "" {
       didSet {
-        print("User set to \(self.user)")
           checkAndLoad()
       }
     }
     
     @objc var apikey: NSString = "" {
       didSet {
-        print("apikey set to \(self.apikey)")
           checkAndLoad()
 
       }
@@ -80,12 +81,29 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     
     @objc var googleApikey : NSString = "" {
       didSet {
-        print("googleApikey set to \(self.googleApikey)")
           checkAndLoad()
 
       }
     }
+
+    @objc var enablePoiClustering: Bool = true {
+      didSet {
+        print("enablePoiClustering set to \(self.enablePoiClustering)")
+      }
+    }
   
+    @objc var showPoiNames: Bool = true {
+      didSet {
+        print("showPoiNames set to \(self.showPoiNames)")
+      }
+    }
+
+    @objc var useRemoteConfig: Bool = true {
+      didSet {
+        print("useRemoteConfig set to \(self.useRemoteConfig)")
+      }
+    }
+
   @objc var status = false {
       didSet {
           self.setupView()

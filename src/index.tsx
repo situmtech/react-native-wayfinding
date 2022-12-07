@@ -38,6 +38,9 @@ export interface MapViewProps {
   onNavigationFinished?: (event: any) => void;
   style?: any;
   iOSMapViewIndex?: string;
+  enablePoiClustering?: boolean;
+  showPoiNames?: boolean;
+  useRemoteConfig?: boolean;
 }
 
 export const MapView: React.FC<MapViewProps> = (props) => (
