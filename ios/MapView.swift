@@ -95,7 +95,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       }
     }
   
-    @objc var showPoiNames: BOOL = false {
+    @objc var showPoiNames: BOOL = true {
       didSet {
         print("showPoiNames set to \(self.showPoiNames)")
       }
