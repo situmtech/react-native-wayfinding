@@ -38,6 +38,9 @@ export interface MapViewProps {
   onNavigationFinished?: (event: any) => void;
   style?: any;
   iOSMapViewIndex?: string;
+  minZoom?: number;
+  maxZoom?: number;
+  initialZoom?: number;
 }
 
 export const MapView: React.FC<MapViewProps> = (props) => (

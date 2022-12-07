@@ -56,6 +56,21 @@ public class MapViewManager extends SimpleViewManager<MapView> {
     view.setBuildingId(buildingId);
   }
 
+  @ReactProp(name = "maxZoom", defaultInt = -1)
+  public void setMaxZoom(MapView view, int z) {
+    view.setMaxZoom(z);
+  }
+
+  @ReactProp(name = "minZoom", defaultInt = -1)
+  public void setMinZoom(MapView view, int z) {
+    view.setMinZoom(z);
+  }
+
+  @ReactProp(name = "initialZoom", defaultInt = -1)
+  public void setInitialZoom(MapView view, int z) {
+    view.setInitialZoom(z);
+  }
+
   public Map getExportedCustomBubblingEventTypeConstants() {
     String eventName = "onClickEvent";
     String propName = "onClick";

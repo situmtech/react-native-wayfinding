@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.view.View;
+
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.google.android.gms.maps.model.LatLng;
 import com.reactnativesitumwayfindingplugin.R;
@@ -45,6 +47,9 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   private String googleApikey = "";
 
   private String buildingId = "";
+  private int minZoom = -1;
+  private int maxZoom = -1;
+  private int initialZoom = -1;
 
   private LibrarySettings librarySettings;
   private SitumMapsLibrary mapsLibrary;
@@ -106,6 +111,18 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
 
   public void setBuildingId(String buildingId) {
     this.buildingId = buildingId;
+  }
+
+  public void setMinZoom(int z) {
+    this.minZoom = z;
+  }
+
+  public void setMaxZoom(int z) {
+    this.maxZoom = z;
+  }
+
+  public void setInitialZoom(int z) {
+    this.initialZoom = z;
   }
 
   // public void onMapReadyCallback()
@@ -194,6 +211,11 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   }
 
   @Override
+  public void onNavigationStarted(Navigation navigation) {
+    // Do nothing.
+  }
+
+  @Override
   public void onNavigationError(Navigation navigation, NavigationError navigationError) {
 
     ReactMessageManager.sendReactMessage(MapView.this, ReactMessage.NAVIGATION_ERROR_CALLBACK,
@@ -227,6 +249,16 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
     librarySettings = new LibrarySettings();
 
     librarySettings.setApiKey(user, apikey);
+
+    if (maxZoom > 0) {
+      librarySettings.setMaxZoom(maxZoom);
+    }
+    if (minZoom > 0) {
+      librarySettings.setMinZoom(minZoom);
+    }
+    if (initialZoom > 0) {
+      librarySettings.setInitialZoom(initialZoom);
+    }
 
     mapsLibrary = new SitumMapsLibrary(
         this.findViewById(R.id.map_container).findViewById(R.id.maps_library_target).getId(),
