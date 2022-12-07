@@ -86,19 +86,19 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       }
     }
 
-    @objc var enablePoiClustering: BOOL = true {
+    @objc var enablePoiClustering: Bool = true {
       didSet {
         print("enablePoiClustering set to \(self.enablePoiClustering)")
       }
     }
   
-    @objc var showPoiNames: BOOL = true {
+    @objc var showPoiNames: Bool = true {
       didSet {
         print("showPoiNames set to \(self.showPoiNames)")
       }
     }
 
-    @objc var useRemoteConfig: BOOL = true {
+    @objc var useRemoteConfig: Bool = true {
       didSet {
         print("useRemoteConfig set to \(self.useRemoteConfig)")
       }
