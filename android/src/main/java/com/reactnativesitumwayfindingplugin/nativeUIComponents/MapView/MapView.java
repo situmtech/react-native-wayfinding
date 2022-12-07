@@ -210,6 +210,11 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   }
 
   @Override
+  public void onNavigationStarted(Navigation navigation) {
+    // Do nothing.
+  }
+
+  @Override
   public void onNavigationError(Navigation navigation, NavigationError navigationError) {
 
     ReactMessageManager.sendReactMessage(MapView.this, ReactMessage.NAVIGATION_ERROR_CALLBACK,
