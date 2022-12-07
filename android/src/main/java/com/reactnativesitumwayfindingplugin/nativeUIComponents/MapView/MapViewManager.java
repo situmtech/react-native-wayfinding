@@ -58,17 +58,17 @@ public class MapViewManager extends SimpleViewManager<MapView> {
 
   @ReactProp(name = "enablePoiClustering")
   public void setEnablePoiClustering(MapView view, Boolean enablePoiClustering) {
-    // view.setStatus(status);
+    view.setEnablePoiClustering(enablePoiClustering);
   }
 
   @ReactProp(name = "showPoiNames")
   public void setShowPoiNames(MapView view, Boolean showPoiNames) {
-    // view.setStatus(status);
+    view.setShowPoiNames(showPoiNames);
   }
 
   @ReactProp(name = "useRemoteConfig")
   public void setUseRemoteConfig(MapView view, Boolean useRemoteConfig) {
-    // view.setStatus(status);
+    view.setUseRemoteConfig(useRemoteConfig);
   }
 
   public Map getExportedCustomBubblingEventTypeConstants() {
