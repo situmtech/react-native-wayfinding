@@ -38,6 +38,9 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       let settings = LibrarySettings.Builder()
           .setCredentials(credentials: credentials)
           .setBuildingId(buildingId: buildingId)
+          .setShowPoiNames(showPoiNames: showPoiNames)
+          .setUseRemoteConfig(useRemoteConfig: useRemoteConfig)
+          .setEnablePoiClustering(enablePoisClustering: enablePoiClustering)
           .build()
       
      var viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
@@ -85,7 +88,25 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
 
       }
     }
+
+    @objc var enablePoiClustering: BOOL = true {
+      didSet {
+        print("enablePoiClustering set to \(self.enablePoiClustering)")
+      }
+    }
   
+    @objc var showPoiNames: BOOL = false {
+      didSet {
+        print("showPoiNames set to \(self.showPoiNames)")
+      }
+    }
+
+    @objc var useRemoteConfig: BOOL = true {
+      didSet {
+        print("useRemoteConfig set to \(self.useRemoteConfig)")
+      }
+    }
+
   @objc var status = false {
       didSet {
           self.setupView()
