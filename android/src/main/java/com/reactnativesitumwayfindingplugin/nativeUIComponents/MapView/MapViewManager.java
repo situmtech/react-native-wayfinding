@@ -71,6 +71,11 @@ public class MapViewManager extends SimpleViewManager<MapView> {
     view.setUseRemoteConfig(useRemoteConfig);
   }
 
+  @ReactProp(name = "useDashboardTheme")
+  public void setUseDashboardTheme(MapView view, Boolean useDashboardTheme) {
+    view.setUseDashboardTheme(useDashboardTheme);
+  }
+
   public Map getExportedCustomBubblingEventTypeConstants() {
     String eventName = "onClickEvent";
     String propName = "onClick";

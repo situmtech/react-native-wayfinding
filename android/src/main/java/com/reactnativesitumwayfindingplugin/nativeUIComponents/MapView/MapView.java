@@ -49,6 +49,8 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
   private boolean enablePoiClustering = true;
   private boolean showPoiNames = true;
   private boolean useRemoteConfig = true;
+  private boolean useDashboardTheme = false;
+  
 
   private LibrarySettings librarySettings;
   private SitumMapsLibrary mapsLibrary;
@@ -122,6 +124,10 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
 
   public void setUseRemoteConfig(Boolean useRemoteConfig) {
     this.useRemoteConfig = useRemoteConfig;
+  }
+
+  public void setUseDashboardTheme(Boolean useDashboardTheme) {
+    this.useDashboardTheme = useDashboardTheme;
   }
 
   // public void onMapReadyCallback()
@@ -252,6 +258,7 @@ public class MapView extends RelativeLayout implements SitumMapsListener, OnUser
     librarySettings.setEnablePoiClustering(enablePoiClustering);
     librarySettings.setShowPoiNames(showPoiNames);
     librarySettings.setUseRemoteConfig(useRemoteConfig);
+    librarySettings.setUseDashboardTheme(useDashboardTheme);
 
     mapsLibrary = new SitumMapsLibrary(
         this.findViewById(R.id.map_container).findViewById(R.id.maps_library_target).getId(),
