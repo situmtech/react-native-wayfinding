@@ -35,13 +35,21 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
      let credentials = Credentials(user: user as String, apiKey:  apikey as String, googleMapsApiKey: googleApikey as String)
      
       let buildingId = buildingId as String
-      let settings = LibrarySettings.Builder()
+      let settingsBuilder = LibrarySettings.Builder()
           .setCredentials(credentials: credentials)
           .setBuildingId(buildingId: buildingId)
           .setShowPoiNames(showPoiNames: showPoiNames)
           .setUseRemoteConfig(useRemoteConfig: useRemoteConfig)
           .setEnablePoiClustering(enablePoisClustering: enablePoiClustering)
-          .build()
+
+          
+      if minZoom > 0 {
+        settingsBuilder.setMinZoom(minZoon);
+      }
+
+      if maxZoom > 0 {
+        settingsBuilder.setMaxZoom(maxZoom);
+      }
       
      var viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
      
@@ -50,7 +58,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     }
 
       
-       let library = SitumMapsLibrary.init(containedBy: self, controlledBy: viewController, withSettings: settings )
+       let library = SitumMapsLibrary.init(containedBy: self, controlledBy: viewController, withSettings: settingsBuilder.build() )
      library.setOnMapReadyListener(listener: self)
      library.setOnFloorChangeListener(listener: self)
      library.setOnPoiSelectionListener(listener: self)
@@ -123,7 +131,24 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
             print("iOSMapViewIndex set to \(self.iOSMapViewIndex)")
           }
         }
+
+    @objc var minZoom: NSInteger = -1 {
+        didSet {
+            print("minZoom set to \(self.minZoom)")
+        }
+    }
+
+    @objc var maxZoom: NSInteger = -1 {
+        didSet {
+            print("maxZoom set to \(self.maxZoom)")
+        }
+    }
     
+    @objc var initialZoom: NSInteger = -1 {
+        didSet {
+            print("initialZoom set to \(self.initialZoom)")
+        }
+    }
     
     func checkAndLoad() {
         initialized = self.user != "" && self.apikey != "" && self.googleApikey != "" && buildingId != ""
