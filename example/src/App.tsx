@@ -61,6 +61,8 @@ const App: React.FC = () => {
         enablePoiClustering={true}
         showPoiNames={true}
         useRemoteConfig={true}
+        /* minZoom={18}
+        maxZoom={21} */ 
       />
     </View>
   );
