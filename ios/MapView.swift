@@ -41,7 +41,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           .setShowPoiNames(showPoiNames: showPoiNames)
           .setUseRemoteConfig(useRemoteConfig: useRemoteConfig)
           .setEnablePoiClustering(enablePoisClustering: enablePoiClustering)
-
+          .setUseDashboardTheme(useDashboardTheme: useDashboardTheme)
           
       if minZoom > 0 {
         settingsBuilder.setMinZoom(minZoon);
@@ -65,6 +65,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
      library.setOnNavigationListener(listener: self)
      
       do {
+        
         try library.load()
         // self.isUserInteractionEnabled = false
           print("loaded library.. an error should return bad settings")
@@ -109,6 +110,12 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     @objc var useRemoteConfig: Bool = true {
       didSet {
         print("useRemoteConfig set to \(self.useRemoteConfig)")
+      }
+    }
+
+    @objc var useDashboardTheme: Bool = false {
+      didSet {
+        print("useDashboardTheme set to \(self.useDashboardTheme)")
       }
     }
 

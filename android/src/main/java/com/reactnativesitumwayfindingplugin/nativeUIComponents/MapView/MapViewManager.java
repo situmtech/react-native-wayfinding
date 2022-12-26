@@ -85,6 +85,11 @@ public class MapViewManager extends SimpleViewManager<MapView> {
   public void setInitialZoom(MapView view, int z) {
     view.setInitialZoom(z);
   }
+  
+  @ReactProp(name = "useDashboardTheme")
+  public void setUseDashboardTheme(MapView view, Boolean useDashboardTheme) {
+    view.setUseDashboardTheme(useDashboardTheme);
+  }
 
   public Map getExportedCustomBubblingEventTypeConstants() {
     String eventName = "onClickEvent";

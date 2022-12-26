@@ -63,6 +63,7 @@ const App: React.FC = () => {
         useRemoteConfig={true}
         /* minZoom={18}
         maxZoom={21} */ 
+        useDashboardTheme={true}
       />
     </View>
   );

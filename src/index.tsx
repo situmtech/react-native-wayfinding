@@ -44,6 +44,7 @@ export interface MapViewProps {
   minZoom?: number;
   maxZoom?: number;
   initialZoom?: number;
+  useDashboardTheme?: boolean;
 }
 
 export const MapView: React.FC<MapViewProps> = (props) => (
