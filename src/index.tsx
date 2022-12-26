@@ -42,8 +42,6 @@ export interface MapViewProps {
   showPoiNames?: boolean;
   useRemoteConfig?: boolean;
   useDashboardTheme?: boolean;
-  onEnteredGeofence?: (event: any) => void;
-  onExitedGeofence?:(event: any) => void;
 }
 
 export const MapView: React.FC<MapViewProps> = (props) => (

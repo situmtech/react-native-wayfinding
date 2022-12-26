@@ -43,16 +43,6 @@ const App: React.FC = () => {
     console.log('on navigation finished detected: ' + event);
   };
 
-  const onEnteredGeofence = (event: any) => {
-    console.log('on entered geofence detected: ' + event );
-  };
-
-  const onExitedGeofence = (event: any) => {
-    console.log('on exited geofence detected: ' + event );
-  };
-
-
-
   return (
     <View style={styles.container}>
       <MapView
@@ -72,8 +62,6 @@ const App: React.FC = () => {
         showPoiNames={true}
         useRemoteConfig={true}
         useDashboardTheme={true}
-        onEnteredGeofence={onEnteredGeofence}
-        onExitedGeofence={onExitedGeofence}
       />
     </View>
   );
