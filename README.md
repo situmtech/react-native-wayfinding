@@ -109,6 +109,12 @@ export default function App() {
       onNavigationRequestedCallback={this.onNavigationRequested}
       onNavigationError={this.onNavigationError}
       onNavigationfinished={this.onNavigationFinished}
+      enablePoiClustering={true}
+      showPoiNames={true}
+      useRemoteConfig={true}
+      /* minZoom={18}
+      maxZoom={21} */ 
+      useDashboardTheme={true}
       />
     </View>
   );
