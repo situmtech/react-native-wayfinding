@@ -38,12 +38,17 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       let settings = LibrarySettings.Builder()
           .setCredentials(credentials: credentials)
           .setBuildingId(buildingId: buildingId)
+          .setShowPoiNames(showPoiNames: showPoiNames)
+          .setUseRemoteConfig(useRemoteConfig: useRemoteConfig)
+          .setEnablePoiClustering(enablePoisClustering: enablePoiClustering)
           .build()
       
-      
-      
-      let viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
-      
+     var viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
+     
+     if (self.iOSMapViewIndex != "" && viewController.children.count > 0) {
+        viewController = viewController.children.last!.children[self.iOSMapViewIndex.integerValue]
+    }
+
       
        let library = SitumMapsLibrary.init(containedBy: self, controlledBy: viewController, withSettings: settings )
      library.setOnMapReadyListener(listener: self)
@@ -59,21 +64,16 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       } catch {
           print("User creation failed with error:")
       }
-     
-     print("Hello user: \(user), with apikey: \(apikey) and google apikey: \(googleApikey)")
-
    }
     
     @objc var user: NSString = "" {
       didSet {
-        print("User set to \(self.user)")
           checkAndLoad()
       }
     }
     
     @objc var apikey: NSString = "" {
       didSet {
-        print("apikey set to \(self.apikey)")
           checkAndLoad()
 
       }
@@ -81,12 +81,29 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     
     @objc var googleApikey : NSString = "" {
       didSet {
-        print("googleApikey set to \(self.googleApikey)")
           checkAndLoad()
 
       }
     }
+
+    @objc var enablePoiClustering: Bool = true {
+      didSet {
+        print("enablePoiClustering set to \(self.enablePoiClustering)")
+      }
+    }
   
+    @objc var showPoiNames: Bool = true {
+      didSet {
+        print("showPoiNames set to \(self.showPoiNames)")
+      }
+    }
+
+    @objc var useRemoteConfig: Bool = true {
+      didSet {
+        print("useRemoteConfig set to \(self.useRemoteConfig)")
+      }
+    }
+
   @objc var status = false {
       didSet {
           self.setupView()
@@ -100,6 +117,12 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
 
       }
     }
+
+    @objc var iOSMapViewIndex: NSString = "" {
+          didSet {
+            print("iOSMapViewIndex set to \(self.iOSMapViewIndex)")
+          }
+        }
     
     
     func checkAndLoad() {
@@ -210,6 +233,15 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
 
         let params: [String: Any] = ["navigationStatus": navigation.status];
         onNavigationFinishedCallback(params)
+    }
+
+    @objc var onNavigationStartedCallback: RCTBubblingEventBlock?
+
+    func onNavigationStarted(navigation: SitumWayfinding.Navigation) {
+        print("onNavigationStarted: \(navigation)")
+
+        // TODO: Connect callback
+
     }
     
 }

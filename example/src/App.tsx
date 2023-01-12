@@ -58,6 +58,9 @@ const App: React.FC = () => {
         onNavigationRequested={onNavigationRequested}
         onNavigationError={onNavigationError}
         onNavigationFinished={onNavigationFinished}
+        enablePoiClustering={true}
+        showPoiNames={true}
+        useRemoteConfig={true}
       />
     </View>
   );
