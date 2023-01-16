@@ -102,11 +102,11 @@ export default function App() {
       googleApikey="GOOGLE_MAPS_APIKEY"
       buildingId = ""
 
-      onMapReadyCallback={this.onMapReady}
-      onFloorChangeCallback={this.onFloorChange}
-      onPoiSelectedCallback={this.onPoiSelected}
-      onPoiDeselectedCallback={this.onPoiDeselected}
-      onNavigationRequestedCallback={this.onNavigationRequested}
+      onMapReady={this.onMapReady}
+      onFloorChange={this.onFloorChange}
+      onPoiSelected={this.onPoiSelected}
+      onPoiDeselected={this.onPoiDeselected}
+      onNavigationRequested={this.onNavigationRequested}
       onNavigationError={this.onNavigationError}
       onNavigationfinished={this.onNavigationFinished}
       enablePoiClustering={true}

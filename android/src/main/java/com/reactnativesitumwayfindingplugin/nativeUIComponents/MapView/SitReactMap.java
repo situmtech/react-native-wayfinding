@@ -105,7 +105,8 @@ class SitReactMap implements ReactMessage {
     // Navigation. TODO: add native mappings.
     innerMap.putMap(key, new SitReactMap()
       .putInt(CODE, error.getCode())
-      .putString(MESSAGE, error.getMessage()).getMap());
+      .putString(MESSAGE, error.getMessage())
+      .getMap());
     return this;
   }
 

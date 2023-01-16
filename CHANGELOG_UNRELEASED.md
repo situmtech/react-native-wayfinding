@@ -5,6 +5,7 @@
 
 ### Changed
 - Updated WYF Android to version 0.23.0.
+- Changed the default value of `useDashboardTheme` to `true`.
 - Refactored the code that loads the WYF module.
 - Refactored the object mappings.
 
