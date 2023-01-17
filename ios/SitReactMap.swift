@@ -1,10 +1,10 @@
 import SitumWayfinding
 
-class SitReactMap {
+struct SitReactMap {
 
     // Callbacks mappings:
 
-    func mapFloorChangeResult(from: SITFloor, to: SITFloor, building: SITBuilding) -> Dictionary<String, Any> {
+    static func mapFloorChangeResult(from: SITFloor, to: SITFloor, building: SITBuilding) -> Dictionary<String, Any> {
         return [
             "fromFloorId": from.identifier,
             "toFloorId": to.identifier,
@@ -15,7 +15,7 @@ class SitReactMap {
         ]
     }
 
-    func mapPoiSelectedResult(poi: SITPOI, level: SITFloor, building: SITBuilding) -> Dictionary<String, Any> {
+    static func mapPoiSelectedResult(poi: SITPOI, level: SITFloor, building: SITBuilding) -> Dictionary<String, Any> {
         return [
             "buildingId": building.identifier,
             "buildingName": building.identifier,
@@ -26,14 +26,14 @@ class SitReactMap {
         ]
     }
 
-    func mapPoiDeselectedResult(building: SITBuilding) -> Dictionary<String, Any> {
+    static func mapPoiDeselectedResult(building: SITBuilding) -> Dictionary<String, Any> {
         return [
             "buildingId": building.identifier,
             "buildingName": building.identifier,
         ]
     }
 
-    func mapNavigationResult(navigation: Navigation, error: Error?) -> Dictionary<String, Any> {
+    static func mapNavigationResult(navigation: Navigation, error: Error?) -> Dictionary<String, Any> {
         return [
             "navigation": mapNavigation(navigation)
             "error": error != nil ? mapNavigationError(navigation, error) : ""
@@ -42,21 +42,21 @@ class SitReactMap {
 
     // Object mappings:
 
-    func mapNavigation(navigation: Navigation) -> Dictionary<String, Any> {
+    static func mapNavigation(navigation: Navigation) -> Dictionary<String, Any> {
         return [
             "status": navigation.status.name,
             "destination": mapDestination(navigation.destination)
         ]
     }
 
-    func mapNavigationError(navigation: Navigation, error: Error) -> Dictionary<String, Any> {
+    static func mapNavigationError(navigation: Navigation, error: Error) -> Dictionary<String, Any> {
         return [
             "code": error.code,
             "message": error.message
         ]
     }
 
-    func putDestination(destination: Destination) -> Dictionary<String, Any> {
+    static func putDestination(destination: Destination) -> Dictionary<String, Any> {
         return [
             "category": destination.category,
             "identifier": destination.identifier,
@@ -65,7 +65,7 @@ class SitReactMap {
         ]
     }
 
-    func mapPoint(point: SitPoint) -> Dictionary<String, Any> {
+    static func mapPoint(point: SitPoint) -> Dictionary<String, Any> {
         return [
             "buildingId": point.buildingIdentifier,
             "floorId": point.floorIdentifier,
