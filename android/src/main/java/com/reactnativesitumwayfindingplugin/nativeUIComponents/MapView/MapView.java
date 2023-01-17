@@ -185,7 +185,7 @@ public class MapView extends RelativeLayout implements SitumMapsListener,
     } else {
       ReactMessageManager.sendReactMessage(MapView.this, MAP_READY_CALLBACK,
         new SitReactMap()
-          .putString(MESSAGE, "No building identifier provided.")
+          .putString(MESSAGE, "Succeeded loading WYF module. No building identifier provided.")
           .putString(STATUS, "SUCCESS")
           .getMap());
     }
