@@ -81,8 +81,8 @@ public class MapView extends RelativeLayout implements SitumMapsListener,
     }
 
     final Handler handler = new Handler(Looper.getMainLooper());
-    // onFinishInflate() is called BEFORE the view is attached to the view hierarchy.
-    // Wait for the view to be attached so WYF can load correctly.
+    // onFinishInflate() is called BEFORE the view is present in the view hierarchy.
+    // Wait until the view can be found so WYF can load correctly.
     final Runnable delayLoadUntilViewHierarchy = new Runnable() {
       @Override
       public void run() {
