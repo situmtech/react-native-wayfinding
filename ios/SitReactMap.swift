@@ -35,7 +35,7 @@ struct SitReactMap {
 
     static func mapNavigationResult(navigation: Navigation, error: Error?) -> Dictionary<String, Any> {
         return [
-            "navigation": mapNavigation(navigation)
+            "navigation": mapNavigation(navigation),
             "error": error != nil ? mapNavigationError(navigation, error) : ""
         ]
     }
