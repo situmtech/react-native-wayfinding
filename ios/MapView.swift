@@ -181,7 +181,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           return
       }
 
-      let params: [String: Any] = SitReactMap.mapFloorChangeResult(from, to, building)
+      let params: [String: Any] = SITReactMap.mapFloorChangeResult(from: from, to: to, building: building)
       onFloorChanged(params)
   }
   
@@ -195,7 +195,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           return
       }
 
-      let params: [String: Any] = SitReactMap.mapPoiSelectedResult(poi, level, building)
+      let params: [String: Any] = SITReactMap.mapPoiSelectedResult(poi: poi, level: level, building: building)
       onPoiSelected(params)
   }
   
@@ -208,7 +208,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           return
       }
 
-      let params: [String: Any] = SitReactMap.mapPoiDeselectedResult(building)
+      let params: [String: Any] = SITReactMap.mapPoiDeselectedResult(building: building)
       onPoiDeselected(params)
   }
 
@@ -222,7 +222,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           return
       }
 
-      let params: [String: Any] = SitReactMap.mapNavigationResult(navigation, nil)
+      let params: [String: Any] = SITReactMap.mapNavigationResult(navigation: navigation, error: nil)
       onNavigationRequested(params)
   }
   
@@ -235,7 +235,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           return
       }
 
-      let params: [String: Any] = SitReactMap.mapNavigationResult(navigation, nil)
+      let params: [String: Any] = SITReactMap.mapNavigationResult(navigation: navigation, error: nil)
       onNavigationFinished(params)
   }
 
@@ -248,7 +248,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           return
       }
 
-      let params: [String: Any] = SitReactMap.mapNavigationResult(navigation, nil)
+      let params: [String: Any] = SITReactMap.mapNavigationResult(navigation: navigation, error: nil)
       onNavigationStarted(params)
   }
 
@@ -261,7 +261,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           return
       }
 
-      let params: [String: Any] = SitReactMap.mapNavigationError(navigation, error)
+      let params: [String: Any] = SITReactMap.mapNavigationError(navigation: navigation, error: error)
       onNavigationError(params)
   }
 }

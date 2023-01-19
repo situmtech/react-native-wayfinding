@@ -1,6 +1,6 @@
 import SitumWayfinding
 
-struct SitReactMap {
+struct SITReactMap {
 
     // Callbacks mappings:
 
@@ -35,8 +35,8 @@ struct SitReactMap {
 
     static func mapNavigationResult(navigation: Navigation, error: Error?) -> Dictionary<String, Any> {
         return [
-            "navigation": mapNavigation(navigation),
-            "error": error != nil ? mapNavigationError(navigation, error) : ""
+            "navigation": mapNavigation(navigation: navigation),
+            "error": error != nil ? mapNavigationError(navigation: navigation, error: error!) : ""
         ]
     }
 
@@ -44,33 +44,57 @@ struct SitReactMap {
 
     static func mapNavigation(navigation: Navigation) -> Dictionary<String, Any> {
         return [
-            "status": navigation.status.name,
-            "destination": mapDestination(navigation.destination)
+            "status": mapNavigationStatus(status: navigation.status),
+            "destination": mapDestination(destination: navigation.destination)
         ]
     }
 
     static func mapNavigationError(navigation: Navigation, error: Error) -> Dictionary<String, Any> {
         return [
-            "code": error.code,
-            "message": error.message
+            "code": error._code,
+            "message": error.localizedDescription
         ]
     }
 
-    static func putDestination(destination: Destination) -> Dictionary<String, Any> {
+    static func mapDestination(destination: Destination) -> Dictionary<String, Any> {
         return [
-            "category": destination.category,
-            "identifier": destination.identifier,
-            "name": destination.name,
-            "point": mapPoint(destination.point)
+            "category": mapDestinationCategory(cat: destination.category),
+            "identifier": destination.identifier ?? "",
+            "name": destination.name ?? "",
+            "point": mapPoint(point: destination.point)
         ]
     }
 
-    static func mapPoint(point: SitPoint) -> Dictionary<String, Any> {
+    static func mapPoint(point: SITPoint) -> Dictionary<String, Any> {
         return [
             "buildingId": point.buildingIdentifier,
             "floorId": point.floorIdentifier,
-            "latitude": point.coordinate.latitude,
-            "longitude": point.coordinate.longitude
+            "latitude": point.coordinate().latitude,
+            "longitude": point.coordinate().longitude
         ]
+    }
+    
+    static func mapNavigationStatus(status: NavigationStatus) -> String {
+        switch status {
+        case .requested:
+            return  "REQUESTED"
+        case .started:
+            return  "STARTED"
+        case .error(_):
+            return "ERROR"
+        case .destinationReached:
+            return "DESTINATION_REACHED"
+        case .canceled:
+            return "CANCELED"
+        }
+    }
+    
+    static func mapDestinationCategory(cat: DestinationCategory) -> String {
+        switch cat {
+        case .poi(_):
+            return "POI"
+        case .location(_):
+            return "LOCATION"
+        }
     }
 }
