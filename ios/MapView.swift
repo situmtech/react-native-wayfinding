@@ -173,7 +173,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     
   // OnFloorChangeListener
   @objc var onFloorChanged: RCTBubblingEventBlock?
-  
+
   func onFloorChanged(from: SITFloor, to: SITFloor, building: SITBuilding) {
       print("On Floor Changed: from \(from), to: \(to), building: \(building)")
       
@@ -181,7 +181,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           return
       }
 
-      let params: [String: Any] = SITReactMap.mapFloorChangeResult(from: from, to: to, building: building)
+      let params: [String: Any] = SITReactMap.mapFloorChangedResult(from: from, to: to, building: building)
       onFloorChanged(params)
   }
   

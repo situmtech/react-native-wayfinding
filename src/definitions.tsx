@@ -14,7 +14,7 @@ export interface OnPoiDeselectedResult {
     buildingId: String;
     buildingName: String;
 }
-export interface OnFloorChangeResult {
+export interface OnFloorChangedResult {
     buildingId: String;
     buildingName: String;
     fromFloorId: String;
@@ -52,7 +52,7 @@ export interface MapViewProps {
     googleApikey: string;
     buildingId: string;
     onMapReady?: (event: WayfindingResult) => void;
-    onFloorChange?: (event: OnFloorChangeResult) => void;
+    onFloorChanged?: (event: OnFloorChangedResult) => void;
     onPoiSelected?: (event: OnPoiSelectedResult) => void;
     onPoiDeselected?: (event: OnPoiDeselectedResult) => void;
     onNavigationRequested?: (event: OnNavigationResult) => void;

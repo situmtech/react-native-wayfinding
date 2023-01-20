@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { MapView, OnFloorChangeResult, OnNavigationResult, OnPoiDeselectedResult, OnPoiSelectedResult, WayfindingResult } from '@situm/react-native-wayfinding';
+import { MapView, OnFloorChangedResult, OnNavigationResult, OnPoiDeselectedResult, OnPoiSelectedResult, WayfindingResult } from '@situm/react-native-wayfinding';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,7 +20,7 @@ const App: React.FC = () => {
     console.log('Map is ready now' + JSON.stringify(event));
   };
 
-  const onFloorChange = (event: OnFloorChangeResult) => {
+  const onFloorChanged = (event: OnFloorChangedResult) => {
     console.log('on floor change detected: ' + JSON.stringify(event));
   };
 
@@ -57,7 +57,7 @@ const App: React.FC = () => {
         googleApikey="GOOGLE_MAPS_APIKEY"
         buildingId="PUT_THE_BUILDING_IDENTIFIER_HERE"
         onMapReady={onMapReady}
-        onFloorChange={onFloorChange}
+        onFloorChanged={onFloorChanged}
         onPoiSelected={onPoiSelected}
         onPoiDeselected={onPoiDeselected}
         onNavigationRequested={onNavigationRequested}

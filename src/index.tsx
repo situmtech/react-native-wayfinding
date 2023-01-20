@@ -36,8 +36,8 @@ export class MapView extends React.PureComponent<wyf.MapViewProps> {
     this.props.onMapReady?.(event.nativeEvent);
   }
 
-  _onFloorChange = (event: any) => {
-    this.props.onFloorChange?.(event.nativeEvent);
+  _onFloorChanged = (event: any) => {
+    this.props.onFloorChanged?.(event.nativeEvent);
   }
 
   _onPoiSelected = (event:any) => {
@@ -68,7 +68,7 @@ export class MapView extends React.PureComponent<wyf.MapViewProps> {
     let composedProperties = {
       ...this.props,
       onMapReady: this._onMapReady,
-      onFloorChange: this._onFloorChange,
+      onFloorChanged: this._onFloorChanged,
       onPoiSelected: this._onPoiSelected,
       onPoiDeselected: this._onPoiDeselected,
       onNavigationRequested: this._onNavigationRequested,

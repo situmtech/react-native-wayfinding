@@ -70,7 +70,7 @@ export default function App() {
     console.log("Map is ready now" + event);
   }
 
-  onFloorChange = (event: any) => {
+  onFloorChanged = (event: any) => {
     console.log("on floor change detected: " + event);
   }
 
@@ -103,7 +103,7 @@ export default function App() {
       buildingId = ""
 
       onMapReady={this.onMapReady}
-      onFloorChange={this.onFloorChange}
+      onFloorChanged={this.onFloorChanged}
       onPoiSelected={this.onPoiSelected}
       onPoiDeselected={this.onPoiDeselected}
       onNavigationRequested={this.onNavigationRequested}
@@ -195,7 +195,7 @@ On **iOS** there is nothing else to do rather than including the Google Maps api
 | Callback              | Data  |
 | --------------------- | ----- |
 | **`onMapReady`** | `WayfindingResult` |
-| **`onFloorChange`** | `OnFloorChangeResult` |
+| **`onFloorChanged`** | `OnFloorChangedResult` |
 | **`onPoiSelected`** | `OnPoiSelectedResult` |
 | **`onPoiDeselected`** | `OnPoiDeselectedResult` |
 | **`onNavigationRequested`** | `OnNavigationResult` |
@@ -230,7 +230,7 @@ On **iOS** there is nothing else to do rather than including the Google Maps api
 | **`buildingId`** | `String` |
 | **`buildingName`** | `String` |
 
-#### OnFloorChangeResult
+#### OnFloorChangedResult
 
 |  Prop | Type |
 | - | - |

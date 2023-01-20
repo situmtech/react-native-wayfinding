@@ -243,7 +243,7 @@ public class MapView extends RelativeLayout implements SitumMapsListener,
   }
   // endregion
 
-  // region OnFloorChangeListener
+  // region OnFloorChangedListener
   @Override
   public void onFloorChanged(Floor from, Floor to, Building building) {
     ReactMessageManager.sendReactMessage(MapView.this, FLOOR_CHANGED_CALLBACK,

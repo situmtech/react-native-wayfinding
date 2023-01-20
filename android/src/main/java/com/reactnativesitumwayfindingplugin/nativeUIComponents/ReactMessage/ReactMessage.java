@@ -8,7 +8,7 @@ public interface ReactMessage {
   String NAVIGATION_STARTED_CALLBACK = "onNavigationStarted";
   String NAVIGATION_ERROR_CALLBACK = "onNavigationError";
   String NAVIGATION_FINISHED_CALLBACK = "onNavigationFinished";
-  String FLOOR_CHANGED_CALLBACK = "onFloorChange";
+  String FLOOR_CHANGED_CALLBACK = "onFloorChanged";
 
   String FROM_FLOOR_ID = "fromFloorId";
   String TO_FLOOR_ID = "toFloorId";

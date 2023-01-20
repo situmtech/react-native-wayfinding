@@ -4,7 +4,7 @@ struct SITReactMap {
 
     // Callbacks mappings:
 
-    static func mapFloorChangeResult(from: SITFloor, to: SITFloor, building: SITBuilding) -> Dictionary<String, Any> {
+    static func mapFloorChangedResult(from: SITFloor, to: SITFloor, building: SITBuilding) -> Dictionary<String, Any> {
         return [
             "fromFloorId": from.identifier,
             "toFloorId": to.identifier,
@@ -19,7 +19,7 @@ struct SITReactMap {
         return [
             "buildingId": building.identifier,
             "buildingName": building.identifier,
-            "floorId": level.name,
+            "floorId": level.identifier,
             "floorName": level.name,
             "poiId": poi.identifier,
             "poiName": poi.name
