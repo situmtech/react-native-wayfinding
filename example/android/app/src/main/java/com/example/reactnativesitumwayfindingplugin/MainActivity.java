@@ -1,5 +1,10 @@
 package com.example.reactnativesitumwayfindingplugin;
 
+import static androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions.EXTRA_PERMISSIONS;
+import static androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions.EXTRA_PERMISSION_GRANT_RESULTS;
+
+import android.app.Activity;
+import android.content.Intent;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
@@ -37,4 +42,13 @@ public class MainActivity extends ReactActivity {
       return reactRootView;
     }
   }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    this.onActivityResult(requestCode, Activity.RESULT_OK, new Intent()
+      .putExtra(EXTRA_PERMISSIONS, permissions)
+      .putExtra(EXTRA_PERMISSION_GRANT_RESULTS, grantResults));
+  }
+
 }
