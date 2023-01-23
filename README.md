@@ -70,7 +70,7 @@ export default function App() {
     console.log("Map is ready now" + event);
   }
 
-  onFloorChange = (event: any) => {
+  onFloorChanged = (event: any) => {
     console.log("on floor change detected: " + event);
   }
 
@@ -102,18 +102,19 @@ export default function App() {
       googleApikey="GOOGLE_MAPS_APIKEY"
       buildingId = ""
 
-      onMapReadyCallback={this.onMapReady}
-      onFloorChangeCallback={this.onFloorChange}
-      onPoiSelectedCallback={this.onPoiSelected}
-      onPoiDeselectedCallback={this.onPoiDeselected}
-      onNavigationRequestedCallback={this.onNavigationRequested}
+      onMapReady={this.onMapReady}
+      onFloorChanged={this.onFloorChanged}
+      onPoiSelected={this.onPoiSelected}
+      onPoiDeselected={this.onPoiDeselected}
+      onNavigationRequested={this.onNavigationRequested}
       onNavigationError={this.onNavigationError}
       onNavigationfinished={this.onNavigationFinished}
       enablePoiClustering={true}
       showPoiNames={true}
       useRemoteConfig={true}
-      /* minZoom={18}
-      maxZoom={21} */ 
+      initialZoom={18}
+      minZoom={16}
+      maxZoom={21}
       useDashboardTheme={true}
       />
     </View>
@@ -170,6 +171,114 @@ First, you should create an API Key for your project. Then, add the API Key to y
 ```
 
 On **iOS** there is nothing else to do rather than including the Google Maps apikey on the javascript side of the app.
+
+## API
+
+### `MapView` Properties
+
+|  | Type | Default |
+| - | - | - |
+| **`user`** | `string` | - |
+| **`apikey`** | `string` | - |
+| **`googleApikey`** | `string` | - |
+| **`buildingId`** | `string` | - |
+| **`enablePoiClustering`** | `boolean` | `true` |
+| **`showPoiNames`** | `boolean` | `true` |
+| **`useRemoteConfig`** | `boolean` | `true` |
+| **`initialZoom`** | `number` [15-21] | 18 |
+| **`minZoom`** | `number` [15-21] | - |
+| **`maxZoom`** | `number` [15-21] | - |
+| **`useDashboardTheme`** | `boolean` | `true` |
+
+### Callbacks
+
+| Callback              | Data  |
+| --------------------- | ----- |
+| **`onMapReady`** | `WayfindingResult` |
+| **`onFloorChanged`** | `OnFloorChangedResult` |
+| **`onPoiSelected`** | `OnPoiSelectedResult` |
+| **`onPoiDeselected`** | `OnPoiDeselectedResult` |
+| **`onNavigationRequested`** | `OnNavigationResult` |
+| **`onNavigationStarted`** | `OnNavigationResult` |
+| **`onNavigationError`** | `OnNavigationResult` |
+| **`onNavigationfinished`** | `OnNavigationResult` |
+
+### Interfaces
+
+#### WayfindingResult
+
+|  Prop | Type |
+| - | - |
+| **`status`** | `String` |
+| **`message`** | `String` |
+
+#### OnPoiSelectedResult
+
+|  Prop | Type |
+| - | - |
+| **`buildingId`** | `String` |
+| **`buildingName`** | `String` |
+| **`floorId`** | `String` |
+| **`floorName`** | `String` |
+| **`poiId`** | `String` |
+| **`poiName`** | `String` |
+
+#### OnPoiDeselectedResult
+
+|  Prop | Type |
+| - | - |
+| **`buildingId`** | `String` |
+| **`buildingName`** | `String` |
+
+#### OnFloorChangedResult
+
+|  Prop | Type |
+| - | - |
+| **`buildingId`** | `String` |
+| **`buildingName`** | `String` |
+| **`fromFloorId`** | `String` |
+| **`toFloorId`** | `String` |
+| **`fromFloorName`** | `String` |
+| **`toFloorName`** | `String` |
+
+#### Point
+
+|  Prop | Type |
+| - | - |
+| **`buildingId`** | `String` |
+| **`floorId`** | `String` |
+| **`latitude`** | `Number` |
+| **`longitude`** | `Number` |
+
+#### Destination
+
+|  Prop | Type |
+| - | - |
+| **`category`** | `String` |
+| **`identifier`** | `String?` |
+| **`name`** | `String?` |
+| **`point`** | `Point?` |
+
+#### Navigation
+
+|  Prop | Type |
+| - | - |
+| **`status`** | `String` |
+| **`destination`** | `Destination` |
+
+#### OnNavigationResult
+
+|  Prop | Type |
+| - | - |
+| **`navigation`** | `Navigation` |
+| **`error`** | `Error?` |
+
+#### Error
+
+|  Prop | Type |
+| - | - |
+| **`code`** | `Number` |
+| **`message`** | `String` |
 
 ## Versioning
 
