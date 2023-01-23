@@ -129,7 +129,8 @@ dependencies {
 // From node_modules
 
   // Wayfinding native plugin
-  implementation('es.situm:situm-wayfinding:0.22.2-alpha@aar') {
+  implementation('es.situm:situm-wayfinding:0.24.1-alpha@aar') {
+    changing = true
     transitive = true
   }
   implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
