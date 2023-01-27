@@ -43,6 +43,6 @@ export interface MapViewProps {
   useRemoteConfig?: boolean;
 }
 
-export const MapView: React.FC<MapViewProps> = (props) => (
+export const MapView: React.FC<MapViewProps> = (props : MapViewProps) => (
   <RCTMapView {...props} />
 );
