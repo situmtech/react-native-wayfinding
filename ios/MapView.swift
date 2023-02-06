@@ -39,11 +39,11 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
         .setUseDashboardTheme(useDashboardTheme: useDashboardTheme)
 
     if minZoom > 0 {
-      settingsBuilder.setMinZoom(minZoon);
+        settingsBuilder.setMinZoom(minZoom: minZoom);
     }
 
     if maxZoom > 0 {
-      settingsBuilder.setMaxZoom(maxZoom);
+        settingsBuilder.setMaxZoom(maxZoom: maxZoom);
     }
 
     var viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
@@ -132,13 +132,13 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
         }
       }
 
-  @objc var minZoom: NSInteger = -1 {
+  @objc var minZoom: Float = -1 {
       didSet {
           print("minZoom set to \(self.minZoom)")
       }
   }
 
-  @objc var maxZoom: NSInteger = -1 {
+  @objc var maxZoom: Float = -1 {
       didSet {
           print("maxZoom set to \(self.maxZoom)")
       }

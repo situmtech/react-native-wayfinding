@@ -18,8 +18,7 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
-  #s.dependency "SitumWayfinding", "~> 0.16.1"
-  #s.dependency "SitumWayfinding", :git => 'https://github.com/situmtech/react-native-wayfinding.git', :branch => 'feature/zoom-props'
+  s.dependency "SitumWayfinding", "~> 0.18.0"
 
   # Don't install the dependencies when we run `pod install` in the old architecture.
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1' then
