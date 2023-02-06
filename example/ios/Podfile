@@ -27,8 +27,7 @@ target 'SitumWayfindingPluginExample' do
   # you should disable the next line.
   use_flipper!()
 
-  pod "SitumWayfinding", :git => 'git@github.com:situmtech/ios-swift-library-wayfinding.git', :branch => 'feature/zoom-props'
-
+  pod "SitumWayfinding", '0.18.0'
 
   post_install do |installer|
     react_native_post_install(installer)
