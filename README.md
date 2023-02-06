@@ -66,33 +66,37 @@ import { MapView } from '@situm/react-native-wayfinding';
 
 export default function App() {
 
-  onMapReady = (event: any) => {
-    console.log("Map is ready now" + event);
-  }
+  const onMapReady = (event: WayfindingResult) => {
+    console.log('Map is ready now' + JSON.stringify(event));
+  };
 
-  onFloorChanged = (event: any) => {
-    console.log("on floor change detected: " + event);
-  }
+  const onFloorChanged = (event: OnFloorChangedResult) => {
+    console.log('on floor change detected: ' + JSON.stringify(event));
+  };
 
-  onPoiSelected = (event: any) => {
-    console.log("on poi selected detected: " + event);
-  }
+  const onPoiSelected = (event: OnPoiSelectedResult) => {
+    console.log('on poi selected detected: ' + JSON.stringify(event));
+  };
 
-  onPoiDeselected = (event: any) => {
-    console.log("on poi deselected detected: " + event);
-  }
+  const onPoiDeselected = (event: OnPoiDeselectedResult) => {
+    console.log('on poi deselected detected: ' + JSON.stringify(event));
+  };
 
-  onNavigationRequested = (event: any) => {
-    console.log("on navigation requested detected: " + event);
-  }
+  const onNavigationRequested = (event: OnNavigationResult) => {
+    console.log('on navigation requested detected: ' + JSON.stringify(event));
+  };
 
-  onNavigationError = (event: any) => {
-    console.log("on navigation error detected: " + event);
-  }
+  const onNavigationStarted = (event: OnNavigationResult) => {
+    console.log('on navigation started detected: ' + JSON.stringify(event));
+  };
 
-  onNavigationFinished = (event: any) => {
-    console.log("on navigation finished detected: " + event);
-  }
+  const onNavigationError = (event: OnNavigationResult) => {
+    console.log('on navigation error detected: ' + JSON.stringify(event));
+  };
+
+  const onNavigationFinished = (event: OnNavigationResult) => {
+    console.log('on navigation finished detected: ' + JSON.stringify(event));
+  };
 
   return (
     <View style={styles.container}>
@@ -100,7 +104,7 @@ export default function App() {
       user="SITUM_USER" 
       apikey="SITUM_APIKEY" 
       googleApikey="GOOGLE_MAPS_APIKEY"
-      buildingId = ""
+      buildingId = "BUILDING_ID"
 
       onMapReady={this.onMapReady}
       onFloorChanged={this.onFloorChanged}
