@@ -52,17 +52,78 @@ First, you need to setup a React Native development environment. You will also n
 
 ## Installation
 
+On the root folder of your project, execute:
+
 ```sh
 yarn add https://github.com/situmtech/situm-react-native-wayfinding.git
 ```
 
+or:
+
+```sh
+npm install https://github.com/situmtech/situm-react-native-wayfinding.git
+```
+
+### Situm repository (Android only)
+
+To allow Gradle to compile your Android application, add the Situm artifact repository to the `build.gradle` file at the root of your project:
+
+```groovy
+buildScript {
+  // ...
+}
+
+allprojects {
+    repositories {
+        // ...
+        maven { url "https://repo.situm.es/artifactory/libs-release-local" }
+    }
+}
+```
+
+### Permissions
+
+In order to work correctly the user will have to confirm the use of location and Bluetooth services.
+
+* In Android, this is handled automatically by the plugin.
+* In iOS, you will need to include a pair of keys and its descriptions on the Info.plist file of the native .xcworkspace project. See below:
+  * NSLocationAlwaysAndWhenInUseUsageDescription : Location is required to find out where you are
+  * NSBluetoothAlwaysUsageDescription            : Bluetooth is required to find where you are
+
+### Configure Google Maps APIKEYs
+
+This plugin uses Google Maps as a base layer, on top of which everything else is drawn: floorplans, routes, user’s location… More concretely, it uses the Dynamic Maps service, which has a [generous free tier](https://developers.google.com/maps/billing-and-pricing/pricing#mobile-dynamic).
+
+First, you should create an API Key for your project. Then, on **Android** add the API Key to your “android/src/main/AndroidManifest.xml” file:
+
+```
+<?xml ...>
+<manifest ...>
+  <application
+  ...>
+
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="GOOGLE_MAPS_APIKEY" />
+
+    ...
+    <activity ...></activity>
+  </application>
+</manifest>
+```
+
+On **iOS** there is nothing else to do rather than including the Google Maps APIKEY on the Javascript side of the app (see below).
+
+
 ## Usage
+
+Copy & paste this in your App.tsx or App.js file for a quick start!
 
 ```js
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { MapView } from '@situm/react-native-wayfinding';
+import { MapView, OnFloorChangedResult, OnNavigationResult, OnPoiDeselectedResult, OnPoiSelectedResult, WayfindingResult } from '@situm/react-native-wayfinding';
 
 export default function App() {
 
@@ -101,25 +162,26 @@ export default function App() {
   return (
     <View style={styles.container}>
       <MapView style={styles.mapview} 
-      user="SITUM_USER" 
-      apikey="SITUM_APIKEY" 
-      googleApikey="GOOGLE_MAPS_APIKEY"
-      buildingId = "BUILDING_ID"
+      user="SITUM_USER" //Your Situm user account (e.g. user@email.com)
+      apikey="SITUM_APIKEY" //Your Situm APIKEY
+      googleApikey="GOOGLE_MAPS_APIKEY" //Your Google APIKEY (see previous section)
+      buildingId = "BUILDING_ID" //The identifier of the building where you want to center the view (e.g. "1234")
 
-      onMapReady={this.onMapReady}
-      onFloorChanged={this.onFloorChanged}
-      onPoiSelected={this.onPoiSelected}
-      onPoiDeselected={this.onPoiDeselected}
-      onNavigationRequested={this.onNavigationRequested}
-      onNavigationError={this.onNavigationError}
-      onNavigationfinished={this.onNavigationFinished}
-      enablePoiClustering={true}
-      showPoiNames={true}
-      useRemoteConfig={true}
-      initialZoom={18}
-      minZoom={16}
-      maxZoom={21}
-      useDashboardTheme={true}
+      onMapReady={onMapReady} //Called when the maps is ready
+      onFloorChanged={onFloorChanged} //Called when the user moves to another floor
+      onPoiSelected={onPoiSelected} //Called when the user selects a POI
+      onPoiDeselected={onPoiDeselected} //Called when the user de-selects a POI
+      onNavigationRequested={onNavigationRequested} //Called when the user requests a route / navigation
+      onNavigationStarted={onNavigationStarted} // Called when the navigation starts
+      onNavigationError={onNavigationError} //Called when the route / navigation stops unexpectedly
+      onNavigationFinished={onNavigationFinished} //Called when the route / navigation finishes
+      enablePoiClustering={true} //Clusters close POIs together
+      showPoiNames={true} //Shows the POI name on top of each POI
+      useRemoteConfig={true} // Use the Remote Configuration
+      initialZoom={18} //Initial zoom level
+      minZoom={16} //Minimum zoom level (user can't zoom out further)
+      maxZoom={21} //Maximum zoom level (user can't zoom in further)
+      useDashboardTheme={true} //Use the primary color & logo of your organization as configured in Situm Dashboard
       />
     </View>
   );
@@ -139,160 +201,110 @@ const styles = StyleSheet.create({
 
 ```
 
-## Situm repository
-
-To allow gradle to compile your Android application, add the Situm artifact repository to the `build.gradle` file at the root of your project:
-
-```groovy
-buildScript {
-  // ...
-}
-
-allprojects {
-    repositories {
-        // ...
-        maven { url "https://repo.situm.es/artifactory/libs-release-local" }
-    }
-}
-```
-
-## Permissions
-
-In order to work correctly the user will have to confirm the use of location and bluetooth services.
-
-On Android this is handled automatically by the plugin.
-
-On iOS you will need to include a pair of keys and its descriptions on the Info.plist file of the native .xcworkspace project. See below:
-
-NSLocationAlwaysAndWhenInUseUsageDescription : Location is required to find out where you are
-NSBluetoothAlwaysUsageDescription            : Bluetooth is required to find where you are
-
-If these keys are not included in your native iOS project location will not work properly.
-
-## Configure Google Maps
-
-This plugin uses Google Maps as a base layer, on top of which everything else is drawn: floorplans, routes, user’s location… More concretely, it uses the Dynamic Maps service, which has a [generous free tier](https://developers.google.com/maps/billing-and-pricing/pricing#mobile-dynamic).
-
-First, you should create an API Key for your project. Then, add the API Key to your “AndroidManifest.xml” file:
-
-```
-<?xml ...>
-<manifest ...>
-  <application
-  ...>
-
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="GOOGLE_MAPS_APIKEY" />
-
-    ...
-    <activity ...></activity>
-  </application>
-</manifest>
-```
-
-On **iOS** there is nothing else to do rather than including the Google Maps apikey on the javascript side of the app.
-
 ## API
+
+This plugin is just a (partial) wrapper over our native Android / iOS Situm WYF module. Therefore, you should take a look at [it's documentation](https://situm.com/docs/situm-wyf-introduction-requirements-code-examples-and-more) to have an understanding of how it works and the configurations that can be applied. You will also benefit from taking a look at our SDKs documentation, which Situm WYF uses heavily. Specifically, concepts about [positioning](https://situm.com/docs/mobile-sdks-positioning), [cartography](https://situm.com/docs/sdk-cartography), [routes](https://situm.com/docs/sdk-routes), [navigation](https://situm.com/docs/sdk-navigation) and [remote configuration](https://situm.com/docs/sdk-remote-configuration).
 
 ### `MapView` Properties
 
-|  | Type | Default |
-| - | - | - |
-| **`user`** | `string` | - |
-| **`apikey`** | `string` | - |
-| **`googleApikey`** | `string` | - |
-| **`buildingId`** | `string` | - |
-| **`enablePoiClustering`** | `boolean` | `true` |
-| **`showPoiNames`** | `boolean` | `true` |
-| **`useRemoteConfig`** | `boolean` | `true` |
-| **`initialZoom`** | `number` [15-21] | 18 |
-| **`minZoom`** | `number` [15-21] | - |
-| **`maxZoom`** | `number` [15-21] | - |
-| **`useDashboardTheme`** | `boolean` | `true` |
+|  | Type | Default | Description |
+| - | - | - | - |
+| **`user`** | `string` | - | Your Situm user account (e.g. user@email.com) |
+| **`apikey`** | `string` | - | Your Situm [APIKEY](https://situm.com/docs/registration-account-management/#profile-manage-account-language-and-api-keys) |
+| **`googleApikey`** | `string` | - | Your Google APIKEY (see previous section) |
+| **`buildingId`** | `string` | - | The identifier of the building where you want to center the view (e.g. "1234"). More [info](https://situm.com/docs/sdk-cartography/#sdk-buildings). |
+| **`enablePoiClustering`** | `boolean` | `true` | Clusters close POIs together. More [info](https://situm.com/docs/static-ui-settings/#poi-clustering). |
+| **`showPoiNames`** | `boolean` | `true` | Shows the POI name on top of each POI. More [info](https://situm.com/docs/static-ui-settings/#show-hide-poi-names). |
+| **`useRemoteConfig`** | `boolean` | `true` | Use the Remote Configuration. More [info](https://situm.com/docs/remote-configuration/). |
+| **`initialZoom`** | `number` [15-21] | 18 | Initial zoom level. More [info](https://situm.com/docs/static-ui-settings/#zoom-level). |
+| **`minZoom`** | `number` [15-21] | - | Minimum zoom level (user can't zoom out further). More [info](https://situm.com/docs/static-ui-settings/#zoom-level). |
+| **`maxZoom`** | `number` [15-21] | - | Maximum zoom level (user can't zoom in further). More [info](https://situm.com/docs/static-ui-settings/#zoom-level). |
+| **`useDashboardTheme`** | `boolean` | `true` | Use the primary color & logo of your organization as configured in Situm Dashboard. More [info](https://situm.com/docs/static-ui-settings/#accounts-name). |
 
 ### Callbacks
 
-| Callback              | Data  |
-| --------------------- | ----- |
-| **`onMapReady`** | `WayfindingResult` |
-| **`onFloorChanged`** | `OnFloorChangedResult` |
-| **`onPoiSelected`** | `OnPoiSelectedResult` |
-| **`onPoiDeselected`** | `OnPoiDeselectedResult` |
-| **`onNavigationRequested`** | `OnNavigationResult` |
-| **`onNavigationStarted`** | `OnNavigationResult` |
-| **`onNavigationError`** | `OnNavigationResult` |
-| **`onNavigationfinished`** | `OnNavigationResult` |
+| Callback              | Data  | Description |
+| --------------------- | ----- | ---- |
+| **`onMapReady`** | `WayfindingResult` | Map has been loaded |
+| **`onFloorChanged`** | `OnFloorChangedResult` | User has moved from one floor to another |
+| **`onPoiSelected`** | `OnPoiSelectedResult` | User has selected a POI |
+| **`onPoiDeselected`** | `OnPoiDeselectedResult` | User has deselected a POI |
+| **`onNavigationRequested`** | `OnNavigationResult` | User has requested a route |
+| **`onNavigationStarted`** | `OnNavigationResult` | Navigation has started |
+| **`onNavigationError`** | `OnNavigationResult` | Route could not be computed or navigation finished unexpectedly |
+| **`onNavigationfinished`** | `OnNavigationResult` |  User has reached its destination point |
 
 ### Interfaces
 
 #### WayfindingResult
 
-|  Prop | Type |
-| - | - |
-| **`status`** | `String` |
-| **`message`** | `String` |
+|  Prop | Type |  Description |
+| - | - | - |
+| **`status`** | `String` | "SUCCESS" when the map is ready |
+| **`message`** | `String` | Human readable message |
 
 #### OnPoiSelectedResult
 
-|  Prop | Type |
-| - | - |
-| **`buildingId`** | `String` |
-| **`buildingName`** | `String` |
-| **`floorId`** | `String` |
-| **`floorName`** | `String` |
-| **`poiId`** | `String` |
-| **`poiName`** | `String` |
+
+
+|  Prop | Type |  Description |
+| - | - | - |
+| **`buildingId`** | `String` | ID of the building where the POI was selected |
+| **`buildingName`** | `String` | Name of the building where the POI was selected |
+| **`floorId`** | `String` |  ID of the floor where the POI was selected |
+| **`floorName`** | `String` |  Name of the floor where the POI was selected |
+| **`poiId`** | `String` |  ID of the POI that was selected |
+| **`poiName`** | `String` |  Name of the POI that was selected |
 
 #### OnPoiDeselectedResult
 
-|  Prop | Type |
-| - | - |
-| **`buildingId`** | `String` |
-| **`buildingName`** | `String` |
+|  Prop | Type |  Description |
+| - | - | - |
+| **`buildingId`** | `String` | ID of the building where the POI was deselected |
+| **`buildingName`** | `String` | Name of the building where the POI was deselected |
 
 #### OnFloorChangedResult
 
-|  Prop | Type |
-| - | - |
-| **`buildingId`** | `String` |
-| **`buildingName`** | `String` |
-| **`fromFloorId`** | `String` |
-| **`toFloorId`** | `String` |
-| **`fromFloorName`** | `String` |
-| **`toFloorName`** | `String` |
+|  Prop | Type |  Description |
+| - | - | - |
+| **`buildingId`** | `String` | ID of the building where the floor change happened |
+| **`buildingName`** | `String` |  Name of the building where the floor change happened |
+| **`fromFloorId`** | `String` | ID of the floor from which the user moved |
+| **`toFloorId`** | `String` | ID of the floor to which the user moved |
+| **`fromFloorName`** | `String` | Name of the floor from which the user moved |
+| **`toFloorName`** | `String` | Name of the floor to which the user moved |
 
 #### Point
 
-|  Prop | Type |
-| - | - |
-| **`buildingId`** | `String` |
-| **`floorId`** | `String` |
-| **`latitude`** | `Number` |
-| **`longitude`** | `Number` |
+|  Prop | Type | Description |
+| - | - | - |
+| **`buildingId`** | `String` | ID of the building where the point is |
+| **`floorId`** | `String` | ID of the floor where the point is |
+| **`latitude`** | `Number` | Latitude where the point is in WSG84 |
+| **`longitude`** | `Number` | Longitude where the point is in WSG84 |
 
 #### Destination
 
-|  Prop | Type |
-| - | - |
-| **`category`** | `String` |
-| **`identifier`** | `String?` |
-| **`name`** | `String?` |
-| **`point`** | `Point?` |
+|  Prop | Type | Description |
+| - | - | - |
+| **`category`** | `String` | Type of destination. Options: "POI" (user selected a POI) or "LOCATION" (user selected a location on the map with a long press) |
+| **`identifier`** | `String?` | (Optional) POI identifier (only when category="POI") |
+| **`name`** | `String?` | (Optional) POI name (only when category="POI") |
+| **`point`** | `Point?` | Destination point |
 
 #### Navigation
 
-|  Prop | Type |
-| - | - |
-| **`status`** | `String` |
-| **`destination`** | `Destination` |
+|  Prop | Type | Description |
+| - | - | - |
+| **`status`** | `String` | Status of the navigation request. Options: "REQUESTED" (navigation has been requested, received by "onNavigationRequested" callback), "CANCELED" (navigation stopped by the user, received by "onNavigationFinished" callback), "DESTINATION_REACHED" (user has arrived to the destination, received by "onNavigationFinished" callback)
+| **`destination`** | `Destination` | Destination of the navigation |
 
 #### OnNavigationResult
 
-|  Prop | Type |
-| - | - |
-| **`navigation`** | `Navigation` |
-| **`error`** | `Error?` |
+|  Prop | Type | Description |
+| - | - | - |
+| **`navigation`** | `Navigation` | Result of the navigation provided to callbacks "onNavigationRequested" and "onNavigationFinished" callbacks |
+| **`error`** | `Error?` | (Optional) Error detected during the navigation |
 
 #### Error
 
