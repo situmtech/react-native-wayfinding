@@ -12,236 +12,256 @@ import SitumWayfinding
 
 class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelectionListener, OnNavigationListener {
     
-    var loaded = false
-    var initialized = false
-    
-    
+  var loaded = false
+  var initialized = false
+
   override init(frame: CGRect) {
     super.init(frame: frame)
-    // setupView()
   }
- 
+
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    // setupView()
   }
- 
- private func setupView() {
+
+  private func setupView() {
     // in here you can configure your view
-   // self.backgroundColor = self.status ? .green : .red
-    
-     self.isUserInteractionEnabled = true
-     
-     let credentials = Credentials(user: user as String, apiKey:  apikey as String, googleMapsApiKey: googleApikey as String)
-     
-      let buildingId = buildingId as String
-      let settings = LibrarySettings.Builder()
-          .setCredentials(credentials: credentials)
-          .setBuildingId(buildingId: buildingId)
-          .setShowPoiNames(showPoiNames: showPoiNames)
-          .setUseRemoteConfig(useRemoteConfig: useRemoteConfig)
-          .setEnablePoiClustering(enablePoisClustering: enablePoiClustering)
-          .build()
-      
-     var viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
-     
-     if (self.iOSMapViewIndex != "" && viewController.children.count > 0) {
-        viewController = viewController.children.last!.children[self.iOSMapViewIndex.integerValue]
+    // self.backgroundColor = self.status ? .green : .red
+
+    self.isUserInteractionEnabled = true
+    let credentials = Credentials(user: user as String, apiKey:  apikey as String, googleMapsApiKey: googleApikey as String)
+    let buildingId = buildingId as String
+    let settingsBuilder = LibrarySettings.Builder()
+        .setCredentials(credentials: credentials)
+        .setBuildingId(buildingId: buildingId)
+        .setShowPoiNames(showPoiNames: showPoiNames)
+        .setUseRemoteConfig(useRemoteConfig: useRemoteConfig)
+        .setEnablePoiClustering(enablePoisClustering: enablePoiClustering)
+        .setUseDashboardTheme(useDashboardTheme: useDashboardTheme)
+
+    if minZoom > 0 {
+        settingsBuilder.setMinZoom(minZoom: minZoom);
     }
 
-      
-       let library = SitumMapsLibrary.init(containedBy: self, controlledBy: viewController, withSettings: settings )
-     library.setOnMapReadyListener(listener: self)
-     library.setOnFloorChangeListener(listener: self)
-     library.setOnPoiSelectionListener(listener: self)
-     library.setOnNavigationListener(listener: self)
-     
-      do {
-        try library.load()
-        // self.isUserInteractionEnabled = false
-          print("loaded library.. an error should return bad settings")
-        loaded = true // Put it on false when unloaded
-      } catch {
-          print("User creation failed with error:")
-      }
-   }
-    
-    @objc var user: NSString = "" {
-      didSet {
-          checkAndLoad()
-      }
-    }
-    
-    @objc var apikey: NSString = "" {
-      didSet {
-          checkAndLoad()
-
-      }
-    }
-    
-    @objc var googleApikey : NSString = "" {
-      didSet {
-          checkAndLoad()
-
-      }
+    if maxZoom > 0 {
+        settingsBuilder.setMaxZoom(maxZoom: maxZoom);
     }
 
-    @objc var enablePoiClustering: Bool = true {
-      didSet {
-        print("enablePoiClustering set to \(self.enablePoiClustering)")
-      }
-    }
-  
-    @objc var showPoiNames: Bool = true {
-      didSet {
-        print("showPoiNames set to \(self.showPoiNames)")
-      }
+    var viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
+
+    if (self.iOSMapViewIndex != "" && viewController.children.count > 0) {
+      viewController = viewController.children.last!.children[self.iOSMapViewIndex.integerValue]
     }
 
-    @objc var useRemoteConfig: Bool = true {
-      didSet {
-        print("useRemoteConfig set to \(self.useRemoteConfig)")
-      }
+    let library = SitumMapsLibrary.init(containedBy: self, controlledBy: viewController, withSettings: settingsBuilder.build())
+    library.setOnMapReadyListener(listener: self)
+    library.setOnFloorChangeListener(listener: self)
+    library.setOnPoiSelectionListener(listener: self)
+    library.setOnNavigationListener(listener: self)
+
+    do {
+      try library.load()
+      // self.isUserInteractionEnabled = false
+        print("loaded library.. an error should return bad settings")
+      loaded = true // Put it on false when unloaded
+    } catch {
+        print("User creation failed with error:")
     }
+  }
+
+  @objc var user: NSString = "" {
+    didSet {
+        checkAndLoad()
+    }
+  }
+
+  @objc var apikey: NSString = "" {
+    didSet {
+        checkAndLoad()
+
+    }
+  }
+
+  @objc var googleApikey : NSString = "" {
+    didSet {
+        checkAndLoad()
+
+    }
+  }
+
+  @objc var enablePoiClustering: Bool = true {
+    didSet {
+      print("enablePoiClustering set to \(self.enablePoiClustering)")
+    }
+  }
+
+  @objc var showPoiNames: Bool = true {
+    didSet {
+      print("showPoiNames set to \(self.showPoiNames)")
+    }
+  }
+
+  @objc var useRemoteConfig: Bool = true {
+    didSet {
+      print("useRemoteConfig set to \(self.useRemoteConfig)")
+    }
+  }
+
+  @objc var useDashboardTheme: Bool = true {
+    didSet {
+      print("useDashboardTheme set to \(self.useDashboardTheme)")
+    }
+  }
 
   @objc var status = false {
       didSet {
           self.setupView()
       }
   }
-    
-    @objc var buildingId : NSString = "" {
-      didSet {
-        print("buildingId set to \(self.buildingId)")
-          checkAndLoad()
 
-      }
-    }
+  @objc var buildingId : NSString = "" {
+    didSet {
+      print("buildingId set to \(self.buildingId)")
+        checkAndLoad()
 
-    @objc var iOSMapViewIndex: NSString = "" {
-          didSet {
-            print("iOSMapViewIndex set to \(self.iOSMapViewIndex)")
-          }
-        }
-    
-    
-    func checkAndLoad() {
-        initialized = self.user != "" && self.apikey != "" && self.googleApikey != "" && buildingId != ""
-        if initialized {
-            setupView()
-        }
     }
-   
-  @objc var onClick: RCTBubblingEventBlock?
-   
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-      
-      
-      
   }
-    
-    
-    @objc var onMapReadyCallback: RCTBubblingEventBlock?
-    
+
+  @objc var iOSMapViewIndex: NSString = "" {
+        didSet {
+          print("iOSMapViewIndex set to \(self.iOSMapViewIndex)")
+        }
+      }
+
+  @objc var minZoom: Float = -1 {
+      didSet {
+          print("minZoom set to \(self.minZoom)")
+      }
+  }
+
+  @objc var maxZoom: Float = -1 {
+      didSet {
+          print("maxZoom set to \(self.maxZoom)")
+      }
+  }
+
+  @objc var initialZoom: NSInteger = -1 {
+      didSet {
+          print("initialZoom set to \(self.initialZoom)")
+      }
+  }
+
+  func checkAndLoad() {
+      initialized = self.user != "" && self.apikey != "" && self.googleApikey != "" && buildingId != ""
+      if initialized {
+          setupView()
+      }
+  }
+
+  @objc var onMapReady: RCTBubblingEventBlock?
+
   // OnMapReadyListener
   func onMapReady(map: SitumMap) {
       print("on map ready")
-      guard let onMapReadyCallback = self.onMapReadyCallback else { return }
+      guard let onMapReady = self.onMapReady else { return }
 
-      let params: [String : Any] = ["value1":"react demo","value2":1]
-      onMapReadyCallback(params)
+      let params: [String : Any] = [
+        "message": "Succeeded loading WYF module.",
+        "status": "SUCCESS"
+      ]
+      onMapReady(params)
   }
     
-    // OnFloorChangeListener
-    @objc var onFloorChangeCallback: RCTBubblingEventBlock?
-    
-    func onFloorChanged(from: SITFloor, to: SITFloor, building: SITBuilding) {
-        print("On Floor Changed: from \(from), to: \(to), building: \(building)")
-        
-        guard let onFloorChangeCallback = onFloorChangeCallback else {
-            return
-        }
-        
-        let params: [String: Any] = ["from" : from.identifier, "to": to.identifier, "building": building.identifier];
-        onFloorChangeCallback(params)
-    }
-    
-    // OnPoiSelectionListener
-    @objc var onPoiSelectedCallback: RCTBubblingEventBlock?
+  // OnFloorChangeListener
+  @objc var onFloorChanged: RCTBubblingEventBlock?
 
-    func onPoiSelected(poi: SITPOI, level: SITFloor, building: SITBuilding) {
-        print("onPoiSelected: \(poi) level: \(level), building: \(building)")
-        
-        guard let onPoiSelectedCallback = onPoiSelectedCallback else {
-            return
-        }
+  func onFloorChanged(from: SITFloor, to: SITFloor, building: SITBuilding) {
+      print("On Floor Changed: from \(from), to: \(to), building: \(building)")
+      
+      guard let onFloorChanged = onFloorChanged else {
+          return
+      }
 
-        let params: [String: Any] = ["poi" : poi.identifier, "level": level.identifier, "building": building.identifier];
-        onPoiSelectedCallback(params)
-    }
-    
-    @objc var onPoiDeselectedCallback: RCTBubblingEventBlock?
+      let params: [String: Any] = SITReactMap.mapFloorChangedResult(from: from, to: to, building: building)
+      onFloorChanged(params)
+  }
+  
+  // OnPoiSelectionListener
+  @objc var onPoiSelected: RCTBubblingEventBlock?
 
-    func onPoiDeselected(building: SITBuilding) {
-        print("onPoiDeselected: building: \(building)")
-        
-        guard let onPoiDeselectedCallback = onPoiDeselectedCallback else {
-            return
-        }
+  func onPoiSelected(poi: SITPOI, level: SITFloor, building: SITBuilding) {
+      print("onPoiSelected: \(poi) level: \(level), building: \(building)")
+      
+      guard let onPoiSelected = onPoiSelected else {
+          return
+      }
 
-        let params: [String: Any] = ["building": building.identifier];
-        onPoiDeselectedCallback(params)
-    }
-    
-    // OnNavigationListener
-    @objc var onNavigationRequestedCallback: RCTBubblingEventBlock?
+      let params: [String: Any] = SITReactMap.mapPoiSelectedResult(poi: poi, level: level, building: building)
+      onPoiSelected(params)
+  }
+  
+  @objc var onPoiDeselected: RCTBubblingEventBlock?
 
-    func onNavigationRequested(navigation: Navigation) {
-        print("onPoiDeselected: navigation: \(navigation)")
-        
-        guard let onNavigationRequestedCallback = onNavigationRequestedCallback else {
-            return
-        }
+  func onPoiDeselected(building: SITBuilding) {
+      print("onPoiDeselected: building: \(building)")
+      
+      guard let onPoiDeselected = onPoiDeselected else {
+          return
+      }
 
-        let params: [String: Any] = ["navigationStatus": navigation.status];
-        onNavigationRequestedCallback(params)
-        
-    }
-    
-    @objc var onNavigationErrorCallback: RCTBubblingEventBlock?
-    
-    func onNavigationError(navigation: Navigation, error: Error) {
-        print("onNavigationError: \(navigation) \(error)")
-        
-        guard let onNavigationErrorCallback = onNavigationErrorCallback else {
-            return
-        }
+      let params: [String: Any] = SITReactMap.mapPoiDeselectedResult(building: building)
+      onPoiDeselected(params)
+  }
 
-        let params: [String: Any] = ["error": error.localizedDescription];
-        onNavigationErrorCallback(params)
-        
-    }
-    
-    @objc var onNavigationFinishedCallback: RCTBubblingEventBlock?
+  // OnNavigationListener
+  @objc var onNavigationRequested: RCTBubblingEventBlock?
 
-    func onNavigationFinished(navigation: Navigation) {
-        print("onNavigationFinished: \(navigation)")
-        
-        guard let onNavigationFinishedCallback = onNavigationFinishedCallback else {
-            return
-        }
+  func onNavigationRequested(navigation: Navigation) {
+      print("onPoiDeselected: navigation: \(navigation)")
+      
+      guard let onNavigationRequested = onNavigationRequested else {
+          return
+      }
 
-        let params: [String: Any] = ["navigationStatus": navigation.status];
-        onNavigationFinishedCallback(params)
-    }
+      let params: [String: Any] = SITReactMap.mapNavigationResult(navigation: navigation, error: nil)
+      onNavigationRequested(params)
+  }
+  
+  @objc var onNavigationFinished: RCTBubblingEventBlock?
 
-    @objc var onNavigationStartedCallback: RCTBubblingEventBlock?
+  func onNavigationFinished(navigation: Navigation) {
+      print("onNavigationFinished: \(navigation)")
+      
+      guard let onNavigationFinished = onNavigationFinished else {
+          return
+      }
 
-    func onNavigationStarted(navigation: SitumWayfinding.Navigation) {
-        print("onNavigationStarted: \(navigation)")
+      let params: [String: Any] = SITReactMap.mapNavigationResult(navigation: navigation, error: nil)
+      onNavigationFinished(params)
+  }
 
-        // TODO: Connect callback
+  @objc var onNavigationStarted: RCTBubblingEventBlock?
 
-    }
-    
+  func onNavigationStarted(navigation: SitumWayfinding.Navigation) {
+      print("onNavigationStarted: \(navigation)")
+      
+      guard let onNavigationStarted = onNavigationStarted else {
+          return
+      }
+
+      let params: [String: Any] = SITReactMap.mapNavigationResult(navigation: navigation, error: nil)
+      onNavigationStarted(params)
+  }
+
+  @objc var onNavigationError: RCTBubblingEventBlock?
+  
+  func onNavigationError(navigation: Navigation, error: Error) {
+      print("onNavigationError: \(navigation) \(error)")
+      
+      guard let onNavigationError = onNavigationError else {
+          return
+      }
+
+      let params: [String: Any] = SITReactMap.mapNavigationError(navigation: navigation, error: error)
+      onNavigationError(params)
+  }
 }
