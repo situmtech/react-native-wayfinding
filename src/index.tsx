@@ -1,6 +1,8 @@
 import { NativeModules, Platform } from 'react-native';
 import React from 'react';
 import { requireNativeComponent } from 'react-native';
+import type * as wyf from './definitions';
+
 var RCTMapView = requireNativeComponent('RCTMapView');
 
 const LINKING_ERROR =
@@ -9,7 +11,7 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo managed workflow\n';
 
-const SitumWayfindingPlugin = NativeModules.SitumWayfindingPlugin
+export const SitumWayfindingPlugin = NativeModules.SitumWayfindingPlugin
   ? NativeModules.SitumWayfindingPlugin
   : new Proxy(
       {},
@@ -20,29 +22,60 @@ const SitumWayfindingPlugin = NativeModules.SitumWayfindingPlugin
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
+// Plugin functions:
+/*export function multiply(a: number, b: number): Promise<number> {
   return SitumWayfindingPlugin.multiply(a, b);
-}
+}*/
 
-export interface MapViewProps {
-  user: string;
-  apikey: string;
-  googleApikey: string;
-  buildingId: string;
-  onMapReady?: (event: any) => void;
-  onFloorChange?: (event: any) => void;
-  onPoiSelected?: (event: any) => void;
-  onPoiDeselected?: (event: any) => void;
-  onNavigationRequested?: (event: any) => void;
-  onNavigationError?: (event: any) => void;
-  onNavigationFinished?: (event: any) => void;
-  style?: any;
-  iOSMapViewIndex?: string;
-  enablePoiClustering?: boolean;
-  showPoiNames?: boolean;
-  useRemoteConfig?: boolean;
-}
+// Export WYF interfaces:
+export * from './definitions';
+// MapView will wrapp the given callbacks so the passed data can be typed:
+export class MapView extends React.PureComponent<wyf.MapViewProps> {
 
-export const MapView: React.FC<MapViewProps> = (props) => (
-  <RCTMapView {...props} />
-);
+  _onMapReady = (event: any) => {
+    this.props.onMapReady?.(event.nativeEvent);
+  }
+
+  _onFloorChanged = (event: any) => {
+    this.props.onFloorChanged?.(event.nativeEvent);
+  }
+
+  _onPoiSelected = (event:any) => {
+    this.props.onPoiSelected?.(event.nativeEvent);
+  }
+
+  _onPoiDeselected = (event:any) => {
+    this.props.onPoiDeselected?.(event.nativeEvent);
+  }
+
+  _onNavigationRequested = (event:any) => {
+    this.props.onNavigationRequested?.(event.nativeEvent);
+  }
+
+  _onNavigationStarted = (event:any) => {
+    this.props.onNavigationStarted?.(event.nativeEvent);
+  }
+
+  _onNavigationFinished = (event:any) => {
+    this.props.onNavigationFinished?.(event.nativeEvent);
+  }
+
+  _onNavigationError = (event:any) => {
+    this.props.onNavigationError?.(event.nativeEvent);
+  }
+
+  render() {
+    let composedProperties = {
+      ...this.props,
+      onMapReady: this._onMapReady,
+      onFloorChanged: this._onFloorChanged,
+      onPoiSelected: this._onPoiSelected,
+      onPoiDeselected: this._onPoiDeselected,
+      onNavigationRequested: this._onNavigationRequested,
+      onNavigationStarted: this._onNavigationStarted,
+      onNavigationFinished: this._onNavigationFinished,
+      onNavigationError: this._onNavigationError,
+    };
+    return <RCTMapView { ...composedProperties }/>
+  }
+}
