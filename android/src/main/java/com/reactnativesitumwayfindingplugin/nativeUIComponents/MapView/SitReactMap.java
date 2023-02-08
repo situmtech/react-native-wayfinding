@@ -63,6 +63,7 @@ class SitReactMap implements ReactMessage {
     putString(FROM_FLOOR_NAME, from.getName());
     putString(TO_FLOOR_NAME, to.getName());
     putString(BUILDING_ID, building.getIdentifier());
+    putString(BUILDING_NAME, building.getName());
     return this;
   }
 
@@ -85,7 +86,7 @@ class SitReactMap implements ReactMessage {
   public SitReactMap putNavigationResult(Navigation navigation, @Nullable NavigationError error) {
     putNavigation(NAVIGATION, navigation);
     if (error == null) {
-      putNull(ERROR);
+      putString(ERROR, "");
     } else {
       putNavigationError(ERROR, error);
     }
