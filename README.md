@@ -139,6 +139,23 @@ const styles = StyleSheet.create({
 
 ```
 
+## Situm repository
+
+To allow gradle to compile your Android application, add the Situm artifact repository to the `gradle.properties` file at the root of your project:
+
+```groovy
+buildScript {
+  // ...
+}
+
+allprojects {
+    repositories {
+        // ...
+        maven { url "https://repo.situm.es/artifactory/libs-release-local" }
+    }
+}
+```
+
 ## Permissions
 
 In order to work correctly the user will have to confirm the use of location and bluetooth services.
