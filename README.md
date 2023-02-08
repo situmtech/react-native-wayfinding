@@ -287,7 +287,7 @@ This plugin is just a (partial) wrapper over our native Android / iOS Situm WYF 
 
 |  Prop | Type | Description |
 | - | - | - |
-| **`category`** | `String` | Type of destination. Options: "POI" (user selected a POI) or "LOCATION" (user selected a location on the map with a long press) |
+| **`category`** | `String` | Type of destination. Options: "POI" or "LOCATION" |
 | **`identifier`** | `String?` | (Optional) POI identifier (only when category="POI") |
 | **`name`** | `String?` | (Optional) POI name (only when category="POI") |
 | **`point`** | `Point?` | Destination point |
