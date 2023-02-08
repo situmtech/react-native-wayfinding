@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
 
 ## Situm repository
 
-To allow gradle to compile your Android application, add the Situm artifact repository to the `gradle.properties` file at the root of your project:
+To allow gradle to compile your Android application, add the Situm artifact repository to the `build.gradle` file at the root of your project:
 
 ```groovy
 buildScript {
