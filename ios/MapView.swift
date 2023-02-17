@@ -243,7 +243,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           return
       }
 
-      let params: [String: Any] = SITReactMap.mapNavigationError(navigation: navigation, error: error)
+      let params: [String: Any] = SITReactMap.mapNavigationResult(navigation: navigation, error: error)
       onNavigationError(params)
   }
 }
