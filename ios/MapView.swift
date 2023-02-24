@@ -23,6 +23,11 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     super.init(coder: aDecoder)
   }
 
+  override func didMoveToSuperview() {
+    super.didMoveToSuperview()
+    setupView()
+  }
+    
   private func setupView() {
     // in here you can configure your view
     // self.backgroundColor = self.status ? .green : .red
@@ -39,11 +44,11 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
         .setUseDashboardTheme(useDashboardTheme: useDashboardTheme)
 
     if minZoom > 0 {
-        settingsBuilder.setMinZoom(minZoom: minZoom);
+        settingsBuilder.setMinZoom(minZoom: Float(minZoom));
     }
 
     if maxZoom > 0 {
-        settingsBuilder.setMaxZoom(maxZoom: maxZoom);
+        settingsBuilder.setMaxZoom(maxZoom: Float(maxZoom));
     }
 
     var viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
@@ -68,25 +73,11 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     }
   }
 
-  @objc var user: NSString = "" {
-    didSet {
-        checkAndLoad()
-    }
-  }
+  @objc var user: NSString = ""
 
-  @objc var apikey: NSString = "" {
-    didSet {
-        checkAndLoad()
+  @objc var apikey: NSString = ""
 
-    }
-  }
-
-  @objc var googleApikey : NSString = "" {
-    didSet {
-        checkAndLoad()
-
-    }
-  }
+  @objc var googleApikey : NSString = ""
 
   @objc var enablePoiClustering: Bool = true {
     didSet {
@@ -114,15 +105,13 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
 
   @objc var status = false {
       didSet {
-          self.setupView()
+          //self.setupView()
       }
   }
 
   @objc var buildingId : NSString = "" {
     didSet {
       print("buildingId set to \(self.buildingId)")
-        checkAndLoad()
-
     }
   }
 
@@ -132,13 +121,13 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
         }
       }
 
-  @objc var minZoom: Float = -1 {
+  @objc var minZoom: CGFloat = -1 {
       didSet {
           print("minZoom set to \(self.minZoom)")
       }
   }
 
-  @objc var maxZoom: Float = -1 {
+  @objc var maxZoom: CGFloat = -1 {
       didSet {
           print("maxZoom set to \(self.maxZoom)")
       }
@@ -147,13 +136,6 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
   @objc var initialZoom: NSInteger = -1 {
       didSet {
           print("initialZoom set to \(self.initialZoom)")
-      }
-  }
-
-  func checkAndLoad() {
-      initialized = self.user != "" && self.apikey != "" && self.googleApikey != "" && buildingId != ""
-      if initialized {
-          setupView()
       }
   }
 
@@ -261,7 +243,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
           return
       }
 
-      let params: [String: Any] = SITReactMap.mapNavigationError(navigation: navigation, error: error)
+      let params: [String: Any] = SITReactMap.mapNavigationResult(navigation: navigation, error: error)
       onNavigationError(params)
   }
 }

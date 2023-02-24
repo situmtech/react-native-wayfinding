@@ -178,7 +178,7 @@ export default function App() {
       enablePoiClustering={true} //Clusters close POIs together
       showPoiNames={true} //Shows the POI name on top of each POI
       useRemoteConfig={true} // Use the Remote Configuration
-      initialZoom={18} //Initial zoom level
+      initialZoom={18} //Initial zoom level (Android Only)
       minZoom={16} //Minimum zoom level (user can't zoom out further)
       maxZoom={21} //Maximum zoom level (user can't zoom in further)
       useDashboardTheme={true} //Use the primary color & logo of your organization as configured in Situm Dashboard
