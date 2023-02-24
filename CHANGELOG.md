@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2023-02-24
+### Added
+- Now `MapView` exposes interfaces to facilitate the integration of callbacks. All interfaces have been added to the [documentation](./README.md).
+
+### Changed
+- Updated WYF Android to version 0.24.2.
+- Updated WYF iOS to version 0.18.2.
+- Changed the default value of `useDashboardTheme` to `true`.
+- Refactored the code that loads the WYF module.
+- Refactored the object mappings.
+
+### Fixed
+- Now all the exposed callbacks are working as expected.
+
 ## [0.1.8] - 2023-02-08
 
 ### Added
