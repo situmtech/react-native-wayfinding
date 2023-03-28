@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2023-02-24
+
+### Added
+As a developer you can now customize our MapView component with several parameter in order to better fulfill your requirements. A brief description of these parameters are:
+- useRemoteConfig: Boolean value that determines if the location system use the configuration stored on the dashboard (true) or the local one (false)
+- useDashboardTheme: Boolean value that determines if the visual components are customized by colors and logo of the organization (true) or not (false)
+- showPoiNames:Boolean value that determines if the names of the Points of Interest should be displayed (true) or not (false).
+- enablePoiClustering: Boolean value that determines if the Points of Interest get grouped into clusters (true) or are displayed individually (false)
+- minZom, maxZoom: Integer values that determine the minimum and maximum value the zoom can have. If not set, these values are the ones by default of the map provider, Google Maps.
+
+### Changed
+- Updated WYF iOS to version 0.18.2.
+
 ## [0.1.8] - 2023-02-08
 
 ### Added
