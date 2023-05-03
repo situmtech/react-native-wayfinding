@@ -25,10 +25,22 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
 
   override func didMoveToSuperview() {
     super.didMoveToSuperview()
-    setupView()
+    self.waitForControllerAndSetup()
+  }
+  
+  /// Right now we depend on a UIViewController to load WYF, but RN does not provide it.
+  /// The method findViewController looks for the controller associated to any view, but may return nil if called too early.
+  /// The solution implemented here waits for findViewController to return a value and uses it to load WYF.
+  @objc private func waitForControllerAndSetup() {
+    var viewController = self.findViewController()
+    if (viewController != nil) {
+      self.setupView(viewController: viewController!)
+      return
+    }
+    self.perform(#selector(waitForControllerAndSetup), with: nil, afterDelay: 0.05)
   }
     
-  private func setupView() {
+  @objc private func setupView(viewController: UIViewController) {
     // in here you can configure your view
     // self.backgroundColor = self.status ? .green : .red
 
@@ -49,12 +61,6 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
 
     if maxZoom > 0 {
         settingsBuilder.setMaxZoom(maxZoom: Float(maxZoom));
-    }
-
-    var viewController = UIApplication.shared.keyWindow!.rootViewController as! UIViewController
-
-    if (self.iOSMapViewIndex != "" && viewController.children.count > 0) {
-      viewController = viewController.children.last!.children[self.iOSMapViewIndex.integerValue]
     }
 
     let library = SitumMapsLibrary.init(containedBy: self, controlledBy: viewController, withSettings: settingsBuilder.build())
@@ -114,12 +120,6 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       print("buildingId set to \(self.buildingId)")
     }
   }
-
-  @objc var iOSMapViewIndex: NSString = "" {
-        didSet {
-          print("iOSMapViewIndex set to \(self.iOSMapViewIndex)")
-        }
-      }
 
   @objc var minZoom: CGFloat = -1 {
       didSet {
@@ -246,4 +246,18 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
       let params: [String: Any] = SITReactMap.mapNavigationResult(navigation: navigation, error: error)
       onNavigationError(params)
   }
+}
+
+extension UIView {
+
+    /// Find the UIViewController associated to this view.
+    @objc func findViewController() -> UIViewController? {
+        if let nextResponder = self.next as? UIViewController {
+            return nextResponder
+        } else if let nextResponder = self.next as? UIView {
+            return nextResponder.findViewController()
+        } else {
+            return nil
+        }
+    }
 }
