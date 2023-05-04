@@ -27,6 +27,10 @@ export function navigateToPoi(poi: wyf.Poi): Promise<void> {
   return SitumWayfindingPlugin.navigateToPoi(poi);
 }
 
+export function stopNavigation(): Promise<void> {
+  return SitumWayfindingPlugin.stopNavigation();
+}
+
 // Export WYF interfaces:
 export * from './definitions';
 // MapView will wrapp the given callbacks so the passed data can be typed:
