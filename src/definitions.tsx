@@ -46,6 +46,10 @@ export interface OnNavigationResult{
     navigation: Navigation
     error?: Error
 }
+export interface Poi {
+    id: String;
+    buildingId: String;
+}
 export interface MapViewProps {
     user: string;
     apikey: string;

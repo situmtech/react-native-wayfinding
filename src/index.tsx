@@ -23,9 +23,9 @@ export const SitumWayfindingPlugin = NativeModules.SitumWayfindingPlugin
     );
 
 // Plugin functions:
-/*export function multiply(a: number, b: number): Promise<number> {
-  return SitumWayfindingPlugin.multiply(a, b);
-}*/
+export function navigateToPoi(poi: wyf.Poi): Promise<void> {
+  return SitumWayfindingPlugin.navigateToPoi(poi);
+}
 
 // Export WYF interfaces:
 export * from './definitions';

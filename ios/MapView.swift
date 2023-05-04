@@ -14,6 +14,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     
   var loaded = false
   var initialized = false
+  internal static var library: SitumMap? = nil
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -32,7 +33,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
   /// The method findViewController looks for the controller associated to any view, but may return nil if called too early.
   /// The solution implemented here waits for findViewController to return a value and uses it to load WYF.
   @objc private func waitForControllerAndSetup() {
-    var viewController = self.findViewController()
+    let viewController = self.findViewController()
     if (viewController != nil) {
       self.setupView(viewController: viewController!)
       return
@@ -144,8 +145,10 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
   // OnMapReadyListener
   func onMapReady(map: SitumMap) {
       print("on map ready")
+      // Keep reference at SitumWayfindingPlugin:
+      MapView.library = map
+      // Resolve:
       guard let onMapReady = self.onMapReady else { return }
-
       let params: [String : Any] = [
         "message": "Succeeded loading WYF module.",
         "status": "SUCCESS"
