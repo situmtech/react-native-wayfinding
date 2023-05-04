@@ -14,7 +14,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
     
   var loaded = false
   var initialized = false
-  internal static var library: SitumMap? = nil
+  internal static var library: SitumMapsLibrary? = nil
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -72,6 +72,7 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
 
     do {
       try library.load()
+        MapView.library = library
       // self.isUserInteractionEnabled = false
         print("loaded library.. an error should return bad settings")
       loaded = true // Put it on false when unloaded
@@ -145,9 +146,6 @@ class MapView: UIView, OnMapReadyListener, OnFloorChangeListener, OnPoiSelection
   // OnMapReadyListener
   func onMapReady(map: SitumMap) {
       print("on map ready")
-      // Keep reference at SitumWayfindingPlugin:
-      MapView.library = map
-      // Resolve:
       guard let onMapReady = self.onMapReady else { return }
       let params: [String : Any] = [
         "message": "Succeeded loading WYF module.",

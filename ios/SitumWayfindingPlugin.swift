@@ -25,7 +25,9 @@ class SitumWayfindingPlugin: NSObject {
     @objc(stopNavigation:withRejecter:)
     func stopNavigation(resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) -> Void {
         if let wayfinding = MapView.library {
-            wayfinding.stopNavigation()
+            DispatchQueue.main.async {
+                wayfinding.stopNavigation()
+            }
         } else {
             reject("ERROR", "Wayfinding not initialized", nil)
         }
