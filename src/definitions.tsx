@@ -60,7 +60,6 @@ export interface MapViewProps {
     onNavigationError?: (event: OnNavigationResult) => void;
     onNavigationFinished?: (event: OnNavigationResult) => void;
     style?: any;
-    iOSMapViewIndex?: string;
     enablePoiClustering?: boolean;
     showPoiNames?: boolean;
     useRemoteConfig?: boolean;

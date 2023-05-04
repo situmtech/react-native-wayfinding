@@ -245,8 +245,6 @@ This plugin is just a (partial) wrapper over our native Android / iOS Situm WYF 
 
 #### OnPoiSelectedResult
 
-
-
 |  Prop | Type |  Description |
 | - | - | - |
 | **`buildingId`** | `String` | ID of the building where the POI was selected |
@@ -327,6 +325,7 @@ You will need to sign a Contributor License Agreement (CLA) before making a subm
 
 ---
 ## License
+
 This project is licensed under the MIT - see the [LICENSE](./LICENSE) file for further details.
 
 ---
