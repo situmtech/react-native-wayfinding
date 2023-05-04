@@ -1,7 +1,7 @@
 ## Unreleased
 
 ### Added
-* Added new method `SitumWayfindingPlugin.navigateToPoi(Poi)` to start and stop navigation to a given `Poi`.
+* Added new method `SitumWayfindingPlugin.navigateToPoi(Poi)` to start navigation to a given `Poi`.
 * Also added `SitumWayfindingPlugin.stopNavigation()` to stop navigation programmatically.
 
 ### Changed
