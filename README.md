@@ -201,6 +201,26 @@ const styles = StyleSheet.create({
 
 ```
 
+To call WYF methods, just import `SitumWayfindingPlugin` from `@situm/react-native-wayfinding` and use it:
+
+```typescript
+import {
+  MapView,
+  SitumWayfindingPlugin,
+} from "@situm/react-native-wayfinding";
+
+...
+  <Button
+    onPress={() => {
+      SitumWayfindingPlugin.navigateToPoi({
+        id: POI_ID,
+        buildingId: BUILDING_ID,
+      });
+    }}
+    title="NAVIGATE TO POI"
+  />
+```
+
 ## API
 
 This plugin is just a (partial) wrapper over our native Android / iOS Situm WYF module. Therefore, you should take a look at [it's documentation](https://situm.com/docs/situm-wyf-introduction-requirements-code-examples-and-more) to have an understanding of how it works and the configurations that can be applied. You will also benefit from taking a look at our SDKs documentation, which Situm WYF uses heavily. Specifically, concepts about [positioning](https://situm.com/docs/mobile-sdks-positioning), [cartography](https://situm.com/docs/sdk-cartography), [routes](https://situm.com/docs/sdk-routes), [navigation](https://situm.com/docs/sdk-navigation) and [remote configuration](https://situm.com/docs/sdk-remote-configuration).
