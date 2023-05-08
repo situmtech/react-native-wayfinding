@@ -221,6 +221,14 @@ This plugin is just a (partial) wrapper over our native Android / iOS Situm WYF 
 | **`maxZoom`** | `number` [15-21] | - | Maximum zoom level (user can't zoom in further). More [info](https://situm.com/docs/static-ui-settings/#zoom-level). |
 | **`useDashboardTheme`** | `boolean` | `true` | Use the primary color & logo of your organization as configured in Situm Dashboard. More [info](https://situm.com/docs/static-ui-settings/#accounts-name). |
 
+### `SitumWayfindingPlugin` methods
+
+| Method              | Parameters  | Description |
+| --------------------- | ----- | ---- |
+| **`navigateToPoi`** | `Poi` | Start navigation to the given `Poi`, starting at the current user location. |
+| **`stopNavigation`** | - | Stop navigation. |
+
+
 ### Callbacks
 
 | Callback              | Data  | Description |
@@ -271,6 +279,13 @@ This plugin is just a (partial) wrapper over our native Android / iOS Situm WYF 
 | **`toFloorId`** | `String` | ID of the floor to which the user moved |
 | **`fromFloorName`** | `String` | Name of the floor from which the user moved |
 | **`toFloorName`** | `String` | Name of the floor to which the user moved |
+
+#### Poi
+
+|  Prop | Type | Description |
+| - | - | - |
+| **`id`** | `String` | ID of this point of interest |
+| **`buildingId`** | `String` | ID of the building where the POI is |
 
 #### Point
 
