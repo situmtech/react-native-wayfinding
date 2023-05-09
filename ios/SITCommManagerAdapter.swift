@@ -1,14 +1,14 @@
 //
-//  SITCommunicationManager.swift
+//  SITCommManagerAdapter.swift
 //  SitumWayfindingPlugin
 //
-//  Created by Situm on 14/7/22.
+//  Created by Situm on 09/05/23.
 //
 
 import Foundation
 import SitumSDK
 
-class SITCommunicationManager: NSObject {
+class SITCommManagerAdapter: NSObject {
     static func fetchPoiFromBuilding(poiId: String, buildingId: String, completion: @escaping (Result<SITPOI, Error>) -> Void) {
         SitumSDK.SITCommunicationManager.shared().fetchPois(ofBuilding: buildingId, success: { mapping in
             guard mapping != nil, let pois = mapping!["results"] as? [SITPOI] else {return}
