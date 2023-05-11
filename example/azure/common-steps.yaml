@@ -51,10 +51,6 @@ steps:
      
      sed -i "s/PUT_YOUR_GOOGLE_MAPS_APIKEY_HERE/$(MAPS_APIKEY_EXAMPLE)/" example/android/app/src/main/AndroidManifest.xml
 
-
-     cat example/src/App.tsx
-     cat example/android/app/src/main/AndroidManifest.xml
-
    displayName: Configure credentials
  
 
