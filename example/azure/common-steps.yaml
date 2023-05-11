@@ -49,7 +49,7 @@ steps:
      sed  -i "s/GOOGLE_MAPS_APIKEY/$(MAPS_APIKEY_EXAMPLE)/g" example/src/App.tsx
      sed  -i "s/PUT_THE_BUILDING_IDENTIFIER_HERE/${{ parameters.BUILDINGID }}/g" example/src/App.tsx
      
-     sed -i "s/GOOGLE_MAPS_APIKEY/$(MAPS_APIKEY_EXAMPLE)/" android/app/src/main/AndroidManifest.xml
+     sed -i "s/GOOGLE_MAPS_APIKEY/$(MAPS_APIKEY_EXAMPLE)/" example/android/app/src/main/AndroidManifest.xml
 
    displayName: Configure credentials
  
