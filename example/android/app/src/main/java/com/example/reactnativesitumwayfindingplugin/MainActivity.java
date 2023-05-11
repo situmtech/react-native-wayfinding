@@ -1,4 +1,4 @@
-package com.example.reactnativesitumwayfindingplugin;
+package com.situm.rnwyfexample;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

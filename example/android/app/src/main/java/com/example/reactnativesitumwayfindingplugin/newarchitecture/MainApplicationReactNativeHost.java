@@ -1,4 +1,4 @@
-package com.example.reactnativesitumwayfindingplugin.newarchitecture;
+package com.situm.rnwyfexample.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.example.reactnativesitumwayfindingplugin.BuildConfig;
-import com.example.reactnativesitumwayfindingplugin.newarchitecture.components.MainComponentsRegistry;
-import com.example.reactnativesitumwayfindingplugin.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.situm.rnwyfexample.BuildConfig;
+import com.situm.rnwyfexample.newarchitecture.components.MainComponentsRegistry;
+import com.situm.rnwyfexample.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
