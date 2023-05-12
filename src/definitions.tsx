@@ -1,71 +1,85 @@
+//@ts-ignore
+import type { Building } from 'react-native-situm-plugin';
+
+import { ErrorName } from './plugin/CustomMapView';
+
+interface MapViewError {
+  name: ErrorName;
+  description: string;
+}
+
 export interface WayfindingResult {
-    status: String;
-    message: String;
+  status: String;
+  message: String;
 }
 export interface OnPoiSelectedResult {
-    buildingId: String;
-    buildingName: String;
-    floorId: String;
-    floorName: String;
-    poiId: String;
-    poiName: String;
+  buildingId: String;
+  buildingName: String;
+  floorId: String;
+  floorName: String;
+  poiId: String;
+  poiName: String;
 }
 export interface OnPoiDeselectedResult {
-    buildingId: String;
-    buildingName: String;
+  buildingId: String;
+  buildingName: String;
 }
 export interface OnFloorChangedResult {
-    buildingId: String;
-    buildingName: String;
-    fromFloorId: String;
-    toFloorId: String;
-    fromFloorName: String;
-    toFloorName: String;
+  buildingId: String;
+  buildingName: String;
+  fromFloorId: String;
+  toFloorId: String;
+  fromFloorName: String;
+  toFloorName: String;
 }
 export interface Point {
-    buildingId: String
-    floorId: String
-    latitude: Number
-    longitude: Number
+  buildingId: String;
+  floorId: String;
+  latitude: Number;
+  longitude: Number;
 }
 export interface Error {
-    code: Number
-    message: String
+  code: Number;
+  message: String;
 }
 export interface Destination {
-    category: String
-    identifier?: String
-    name?: String
-    point: Point
+  category: String;
+  identifier?: String;
+  name?: String;
+  point: Point;
 }
 export interface Navigation {
-    status: String
-    destination: Destination
+  status: String;
+  destination: Destination;
 }
-export interface OnNavigationResult{
-    navigation: Navigation
-    error?: Error
+export interface OnNavigationResult {
+  navigation: Navigation;
+  error?: Error;
 }
 export interface MapViewProps {
-    user: string;
-    apikey: string;
-    googleApikey: string;
-    buildingId: string;
-    onMapReady?: (event: WayfindingResult) => void;
-    onFloorChanged?: (event: OnFloorChangedResult) => void;
-    onPoiSelected?: (event: OnPoiSelectedResult) => void;
-    onPoiDeselected?: (event: OnPoiDeselectedResult) => void;
-    onNavigationRequested?: (event: OnNavigationResult) => void;
-    onNavigationStarted?: (event: OnNavigationResult) => void;
-    onNavigationError?: (event: OnNavigationResult) => void;
-    onNavigationFinished?: (event: OnNavigationResult) => void;
-    style?: any;
-    iOSMapViewIndex?: string;
-    enablePoiClustering?: boolean;
-    showPoiNames?: boolean;
-    useRemoteConfig?: boolean;
-    minZoom?: number;
-    maxZoom?: number;
-    initialZoom?: number;
-    useDashboardTheme?: boolean;
+  domain: string; //new
+  user: string;
+  apikey: string;
+  googleApikey: string;
+  buildingId: string;
+  building: Building; //new
+  onMapReady?: (event: WayfindingResult) => void;
+  onFloorChange?: (event: OnFloorChangedResult) => void; //new
+  onFloorChanged?: (event: OnFloorChangedResult) => void;
+  onPoiSelected?: (event: OnPoiSelectedResult) => void;
+  onPoiDeselected?: (event: OnPoiDeselectedResult) => void;
+  onNavigationRequested?: (event: OnNavigationResult) => void;
+  onNavigationStarted?: (event: OnNavigationResult) => void;
+  onNavigationError?: (event: OnNavigationResult) => void;
+  onError?: (evente: MapViewError) => void; //new
+  onNavigationFinished?: (event: OnNavigationResult) => void;
+  style?: any;
+  iOSMapViewIndex?: string;
+  enablePoiClustering?: boolean;
+  showPoiNames?: boolean;
+  useRemoteConfig?: boolean;
+  minZoom?: number;
+  maxZoom?: number;
+  initialZoom?: number;
+  useDashboardTheme?: boolean;
 }
