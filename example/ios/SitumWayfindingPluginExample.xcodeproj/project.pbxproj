@@ -292,7 +292,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnativesitumwayfindingplugin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.situm.rnwyfexample;
 				PRODUCT_NAME = SitumWayfindingPluginExample;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -318,7 +318,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.reactnativesitumwayfindingplugin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.situm.rnwyfexample;
 				PRODUCT_NAME = SitumWayfindingPluginExample;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
