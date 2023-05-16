@@ -6,7 +6,6 @@ import {
   WebViewMessageEvent,
 } from 'react-native-webview/lib/WebViewTypes';
 //This icon should either be inside plugin or not be used rat all
-import LoadingIcon from './components/LoadingIcon';
 import { useSitum } from '.';
 import { Mapper } from './mapper';
 import { Platform } from 'react-native';
