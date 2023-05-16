@@ -16,8 +16,8 @@ import {
   setSdkInitialized,
   setAuth,
   selectUser,
-} from './store/index';
-import { useDispatch, useSelector } from './store/utils';
+} from '../store/index';
+import { useDispatch, useSelector } from '../store/utils';
 import {
   resetLocation,
   selectBuildings,
@@ -35,8 +35,8 @@ import {
   setPois,
   setRoute,
   setSubscriptionId,
-} from './store/index';
-import requestPermission from './requestPermission';
+} from '../store/index';
+import requestPermission from '../utils/requestPermission';
 
 const defaultNavigationOptions = {
   distanceToGoalThreshold: 4,
@@ -456,4 +456,3 @@ const useSitum = () => {
 };
 
 export default useSitum;
-export { SitumProvider } from './store/index';

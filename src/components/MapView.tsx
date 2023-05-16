@@ -6,10 +6,15 @@ import {
   WebViewMessageEvent,
 } from 'react-native-webview/lib/WebViewTypes';
 //This icon should either be inside plugin or not be used rat all
-import { useSitum } from '.';
-import { Mapper } from './mapper';
+import useSitum from '../hooks';
+import {
+  mapFollowUserToMessage,
+  mapLocationToMessage,
+  mapNavigationToMessage,
+  mapRouteToMessage,
+} from '../utils/mapper';
 import { Platform } from 'react-native';
-import * as wyf from '../definitions';
+import * as wyf from '../types/index.d';
 import WebView from 'react-native-webview';
 
 // Define class that handles errors
@@ -31,7 +36,7 @@ const sendMessageToViewer = (viewer: WebView, message: string) => {
   viewer.injectJavaScript(`window.postMessage(${message})`);
 };
 
-const CustomMapView: React.FC<wyf.MapViewProps> = ({
+export const MapView: React.FC<wyf.MapViewProps> = ({
   domain,
   user,
   apikey,
@@ -62,7 +67,7 @@ const CustomMapView: React.FC<wyf.MapViewProps> = ({
       !mapLoaded &&
       location?.position?.buildingIdentifier === building?.buildingIdentifier
     ) {
-      sendMessageToViewer(webViewRef.current, Mapper.followUser(true));
+      sendMessageToViewer(webViewRef.current, mapFollowUserToMessage(true));
     }
   };
 
@@ -91,21 +96,21 @@ const CustomMapView: React.FC<wyf.MapViewProps> = ({
   useEffect(() => {
     if (!webViewRef.current || !location) return;
 
-    sendMessageToViewer(webViewRef.current, Mapper.location(location));
+    sendMessageToViewer(webViewRef.current, mapLocationToMessage(location));
   }, [location]);
 
   // Updated SDK navigation
   useEffect(() => {
     if (!webViewRef.current || !navigation) return;
 
-    sendMessageToViewer(webViewRef.current, Mapper.navigation(navigation));
+    sendMessageToViewer(webViewRef.current, mapNavigationToMessage(navigation));
   }, [navigation]);
 
   // Updated SDK route
   useEffect(() => {
     if (!webViewRef.current || !route) return;
 
-    sendMessageToViewer(webViewRef.current, Mapper.route(route));
+    sendMessageToViewer(webViewRef.current, mapRouteToMessage(route));
   }, [route]);
 
   const handleRequestFromViewer = (event: WebViewMessageEvent) => {
@@ -186,5 +191,3 @@ const CustomMapView: React.FC<wyf.MapViewProps> = ({
     />
   );
 };
-
-export default CustomMapView;
