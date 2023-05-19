@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Platform } from 'react-native';
+import WebView from 'react-native-webview';
 //@ts-ignore
 import { Building } from 'react-native-situm-plugin';
 import {
@@ -13,9 +15,9 @@ import {
   mapNavigationToMessage,
   mapRouteToMessage,
 } from '../utils/mapper';
-import { Platform } from 'react-native';
-import * as wyf from '../types/index.d';
-import WebView from 'react-native-webview';
+import { MapViewProps } from '../types/index.d';
+
+const SITUM_BASE_DOMAIN = 'https://map-viewer.situm.com';
 
 // Define class that handles errors
 export enum ErrorName {
@@ -36,7 +38,7 @@ const sendMessageToViewer = (viewer: WebView, message: string) => {
   viewer.injectJavaScript(`window.postMessage(${message})`);
 };
 
-export const MapView: React.FC<wyf.MapViewProps> = ({
+export const MapView: React.FC<MapViewProps> = ({
   domain,
   user,
   apikey,
@@ -89,7 +91,7 @@ export const MapView: React.FC<wyf.MapViewProps> = ({
 
   // Set current building to the one passed as prop
   useEffect(() => {
-    initializeBuilding(building);
+    building && initializeBuilding(building);
   }, [building]);
 
   // Updated SDK location
@@ -158,7 +160,7 @@ export const MapView: React.FC<wyf.MapViewProps> = ({
       //@ts-ignore
       ref={webViewRef}
       source={{
-        uri: `${domain}/?email=${user}&apikey=${apikey}&wl=true&global=true&hide=ni&mode=embed&buildingid=${building?.buildingIdentifier}`,
+        uri: `${domain || SITUM_BASE_DOMAIN}/?email=${user}&apikey=${apikey}&wl=true&global=true&hide=ni&mode=embed&buildingid=${building?.buildingIdentifier}`,
       }}
       style={{
         minHeight: '100%',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import {
   MapView,
@@ -14,7 +14,6 @@ import {
 const SITUM_EMAIL = 'YOUR_EMAIL_HERE';
 const SITUM_API_KEY = 'YOUR_APIKEY_HERE';
 const SITUM_BUILDING_ID = 'YOUR_BUILDING_ID_HERE';
-const SITUM_BASE_DOMAIN = 'https://map-viewer.situm.com';
 
 const styles = StyleSheet.create({
   container: {
@@ -62,10 +61,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <SitumProvider email={SITUM_EMAIL} apiKey={SITUM_API_KEY}>
+    <View style={styles.container}>
+      <SitumProvider email={SITUM_EMAIL} apiKey={SITUM_API_KEY}>
       <MapView
-        domain={SITUM_BASE_DOMAIN}
-        building={null}
         style={styles.mapview}
         user={SITUM_EMAIL}
         apikey={SITUM_API_KEY}
@@ -88,6 +86,8 @@ const App: React.FC = () => {
         useDashboardTheme={true}
       />
     </SitumProvider>
+    </View>
+    
   );
 };
 

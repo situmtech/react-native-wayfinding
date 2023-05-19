@@ -57,12 +57,12 @@ export interface OnNavigationResult {
   error?: Error;
 }
 export interface MapViewProps {
-  domain: string;
+  domain?: string;
   user: string;
   apikey: string;
   googleApikey: string;
   buildingId: string;
-  building: Building;
+  building?: Building;
   onMapReady?: (event: WayfindingResult) => void;
   onFloorChange?: (event: OnFloorChangedResult) => void;
   onFloorChanged?: (event: OnFloorChangedResult) => void;
