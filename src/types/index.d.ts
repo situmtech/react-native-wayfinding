@@ -64,7 +64,6 @@ export interface MapViewProps {
   buildingId: string;
   building?: Building;
   onMapReady?: (event: WayfindingResult) => void;
-  onFloorChange?: (event: OnFloorChangedResult) => void;
   onFloorChanged?: (event: OnFloorChangedResult) => void;
   onPoiSelected?: (event: OnPoiSelectedResult) => void;
   onPoiDeselected?: (event: OnPoiDeselectedResult) => void;
