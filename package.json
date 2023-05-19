@@ -153,7 +153,6 @@
     "react": "*",
     "react-dom": "^18.2.0",
     "react-native": "*",
-    "react-native-paper": "^5.1.4",
     "react-native-permissions": "^3.6.1",
     "react-native-situm-plugin": "0.0.18",
     "react-native-webview": "^11.26.1"
