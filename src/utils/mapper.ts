@@ -19,7 +19,7 @@ export const mapLocationToMessage = (location: Location) =>
     status: location.status,
   });
 
-export const mapRouteToMessage = (route: Route) =>
+export const mapDirectionsToMessage = (route: Route) =>
   mapperWrapper('directions.update', route);
 
 export const mapNavigationToMessage = (navigation: Navigation) =>

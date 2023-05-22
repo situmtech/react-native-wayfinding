@@ -60,7 +60,7 @@ export interface MapViewProps {
   domain?: string;
   user: string;
   apikey: string;
-  googleApikey: string;
+  googleApikey?: string;
   buildingId: string;
   building?: Building;
   onMapReady?: (event: WayfindingResult) => void;
@@ -70,7 +70,7 @@ export interface MapViewProps {
   onNavigationRequested?: (event: OnNavigationResult) => void;
   onNavigationStarted?: (event: OnNavigationResult) => void;
   onNavigationError?: (event: OnNavigationResult) => void;
-  onError?: (evente: MapViewError) => void;
+  onError?: (event: MapViewError) => void;
   onNavigationFinished?: (event: OnNavigationResult) => void;
   style?: any;
   iOSMapViewIndex?: string;

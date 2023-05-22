@@ -172,7 +172,7 @@ export const selectPois = (state: State) => {
   return state.pois;
 };
 
-export const selectRoute = (state: State) => {
+export const selectDirections = (state: State) => {
   return state.route;
 };
 

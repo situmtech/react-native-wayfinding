@@ -13,7 +13,7 @@ import {
   mapFollowUserToMessage,
   mapLocationToMessage,
   mapNavigationToMessage,
-  mapRouteToMessage,
+  mapDirectionsToMessage,
 } from '../utils/mapper';
 import { MapViewProps } from '../types/index.d';
 
@@ -53,7 +53,7 @@ export const MapView: React.FC<MapViewProps> = ({
 
   const {
     location,
-    route,
+    directions,
     navigation,
     currentBuilding,
     initSitumSdk,
@@ -115,10 +115,10 @@ export const MapView: React.FC<MapViewProps> = ({
 
   // Updated SDK route
   useEffect(() => {
-    if (!webViewRef.current || !route) return;
+    if (!webViewRef.current || !directions) return;
 
-    sendMessageToViewer(webViewRef.current, mapRouteToMessage(route));
-  }, [route]);
+    sendMessageToViewer(webViewRef.current, mapDirectionsToMessage(directions));
+  }, [directions]);
 
   const handleRequestFromViewer = (event: WebViewMessageEvent) => {
     const eventParsed = JSON.parse(event.nativeEvent.data);

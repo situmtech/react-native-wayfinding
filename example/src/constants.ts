@@ -1,0 +1,3 @@
+export const SITUM_EMAIL = 'YOUR_EMAIL_HERE';
+export const SITUM_API_KEY = 'YOUR_APIKEY_HERE';
+export const SITUM_BUILDING_ID = 'YOUR_BUILDING_ID_HERE';

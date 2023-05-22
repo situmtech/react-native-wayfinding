@@ -25,7 +25,7 @@ import {
   selectLocation,
   selectNavigation,
   selectPois,
-  selectRoute,
+  selectDirections,
   selectSubscriptionId,
   setBuildings,
   setCurrentBuilding,
@@ -70,7 +70,7 @@ const useSitum = () => {
   const buildings = useSelector(selectBuildings);
   const currentBuilding = useSelector(selectCurrentBuilding);
   const pois = useSelector(selectPois);
-  const route = useSelector(selectRoute);
+  const directions = useSelector(selectDirections);
   const navigation = useSelector(selectNavigation);
   const [lockDirections, setLockDirections] = useState<boolean>(false);
 
@@ -108,9 +108,7 @@ const useSitum = () => {
         }
       });
 
-      SitumPlugin.setUseRemoteConfig('true', () => {
-        console.log('Using remote config');
-      });
+      SitumPlugin.setUseRemoteConfig('true', () => {});
 
       withPosition &&
         (await requestPermission()
@@ -330,7 +328,7 @@ const useSitum = () => {
         };
         //@ts-ignore
         updateRoute && dispatch(setRoute(extendedRoute));
-        return route;
+        return directions;
       })
       .catch((e: string) => {
         //@ts-ignore
@@ -439,7 +437,7 @@ const useSitum = () => {
     currentBuilding,
     buildings,
     pois,
-    route,
+    directions,
     navigation,
 
     // Functions

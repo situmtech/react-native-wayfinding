@@ -10,10 +10,7 @@ import {
   SitumProvider,
   WayfindingResult,
 } from '@situm/react-native-wayfinding';
-
-const SITUM_EMAIL = 'YOUR_EMAIL_HERE';
-const SITUM_API_KEY = 'YOUR_APIKEY_HERE';
-const SITUM_BUILDING_ID = 'YOUR_BUILDING_ID_HERE';
+import { SITUM_API_KEY, SITUM_BUILDING_ID, SITUM_EMAIL } from './constants';
 
 const styles = StyleSheet.create({
   container: {
