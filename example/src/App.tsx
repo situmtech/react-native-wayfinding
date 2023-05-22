@@ -63,31 +63,30 @@ const App: React.FC = () => {
   return (
     <View style={styles.container}>
       <SitumProvider email={SITUM_EMAIL} apiKey={SITUM_API_KEY}>
-      <MapView
-        style={styles.mapview}
-        user={SITUM_EMAIL}
-        apikey={SITUM_API_KEY}
-        googleApikey="GOOGLE_MAPS_APIKEY"
-        buildingId={SITUM_BUILDING_ID}
-        onMapReady={onMapReady}
-        onFloorChanged={onFloorChanged}
-        onPoiSelected={onPoiSelected}
-        onPoiDeselected={onPoiDeselected}
-        onNavigationRequested={onNavigationRequested}
-        onNavigationStarted={onNavigationStarted}
-        onNavigationError={onNavigationError}
-        onNavigationFinished={onNavigationFinished}
-        enablePoiClustering={true}
-        showPoiNames={true}
-        useRemoteConfig={true}
-        initialZoom={18} // Allowed range is [15-21]. Finally max(initialZoom, minZoom).
-        maxZoom={21} // [15-21]
-        minZoom={16} // [15-21]
-        useDashboardTheme={true}
-      />
-    </SitumProvider>
+        <MapView
+          style={styles.mapview}
+          user={SITUM_EMAIL}
+          apikey={SITUM_API_KEY}
+          googleApikey="GOOGLE_MAPS_APIKEY"
+          buildingId={SITUM_BUILDING_ID}
+          onMapReady={onMapReady}
+          onFloorChanged={onFloorChanged}
+          onPoiSelected={onPoiSelected}
+          onPoiDeselected={onPoiDeselected}
+          onNavigationRequested={onNavigationRequested}
+          onNavigationStarted={onNavigationStarted}
+          onNavigationError={onNavigationError}
+          onNavigationFinished={onNavigationFinished}
+          enablePoiClustering={true}
+          showPoiNames={true}
+          useRemoteConfig={true}
+          initialZoom={18} // Allowed range is [15-21]. Finally max(initialZoom, minZoom).
+          maxZoom={21} // [15-21]
+          minZoom={16} // [15-21]
+          useDashboardTheme={true}
+        />
+      </SitumProvider>
     </View>
-    
   );
 };
 

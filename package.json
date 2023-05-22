@@ -1,6 +1,6 @@
 {
   "name": "@situm/react-native-wayfinding",
-  "version": "0.2.0",
+  "version": "0.3.3",
   "description": "test",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -13,13 +13,18 @@
     "android",
     "ios",
     "cpp",
-    "react-native-wayfinding.podspec",
+    "*.podspec",
     "!lib/typescript/example",
     "!android/build",
+    "!android/gradle",
+    "!android/gradlew",
+    "!android/gradlew.bat",
+    "!android/local.properties",
     "!ios/build",
     "!**/__tests__",
     "!**/__fixtures__",
-    "!**/__mocks__"
+    "!**/__mocks__",
+    "!**/.*"
   ],
   "scripts": {
     "test": "jest",
@@ -65,14 +70,29 @@
     "react-native": "0.71.8",
     "react-native-builder-bob": "^0.20.4",
     "release-it": "^15.10.3",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "react-native-permissions": "^3.6.1",
+    "react-native-situm-plugin": "0.0.18",
+    "react-native-webview": "^11.26.1"
   },
   "resolutions": {
     "@types/react": "17.0.21"
   },
-  "peerDependencies": {
+  "dependencies": {
+    "prop-types": "^15.8.1",
     "react": "*",
-    "react-native": "*"
+    "react-dom": "^18.2.0",
+    "react-native": "*",
+    "react-native-permissions": "^3.6.1",
+    "react-native-situm-plugin": "0.0.18",
+    "react-native-webview": "^11.26.1"
+  },
+  "peerDependencies": {
+    "react-native-permissions": "^3.6.1",
+    "react-native-situm-plugin": "0.0.18",
+    "react-native-webview": "^11.26.1",
+    "react-native": "*",
+    "react": "*"
   },
   "jest": {
     "preset": "react-native",
@@ -147,14 +167,5 @@
         }
       ]
     ]
-  },
-  "dependencies": {
-    "prop-types": "^15.8.1",
-    "react": "*",
-    "react-dom": "^18.2.0",
-    "react-native": "*",
-    "react-native-permissions": "^3.6.1",
-    "react-native-situm-plugin": "0.0.18",
-    "react-native-webview": "^11.26.1"
   }
 }

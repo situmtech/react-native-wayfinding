@@ -43,6 +43,7 @@ export const MapView: React.FC<MapViewProps> = ({
   user,
   apikey,
   building,
+  buildingId,
   onPoiSelected = () => {},
   onError = () => {},
 }) => {
@@ -93,6 +94,10 @@ export const MapView: React.FC<MapViewProps> = ({
   useEffect(() => {
     building && initializeBuilding(building);
   }, [building]);
+
+  useEffect(() => {
+    buildingId && initializeBuildingById(buildingId);
+  }, [buildingId]);
 
   // Updated SDK location
   useEffect(() => {
@@ -160,7 +165,11 @@ export const MapView: React.FC<MapViewProps> = ({
       //@ts-ignore
       ref={webViewRef}
       source={{
-        uri: `${domain || SITUM_BASE_DOMAIN}/?email=${user}&apikey=${apikey}&wl=true&global=true&hide=ni&mode=embed&buildingid=${building?.buildingIdentifier}`,
+        uri: `${
+          domain || SITUM_BASE_DOMAIN
+        }/?email=${user}&apikey=${apikey}&wl=true&global=true&hide=ni&mode=embed&buildingid=${
+          building?.buildingIdentifier
+        }`,
       }}
       style={{
         minHeight: '100%',
