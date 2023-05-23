@@ -77,7 +77,7 @@ steps:
       system: "N/A"
       server: "github"
       mergeBranches:
-        - "main"
+        - "master"
         - "develop"
      
 
