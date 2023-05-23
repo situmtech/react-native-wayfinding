@@ -201,6 +201,26 @@ const styles = StyleSheet.create({
 
 ```
 
+To call WYF methods, just import `SitumWayfindingPlugin` from `@situm/react-native-wayfinding` and use it:
+
+```typescript
+import {
+  MapView,
+  SitumWayfindingPlugin,
+} from "@situm/react-native-wayfinding";
+
+...
+  <Button
+    onPress={() => {
+      SitumWayfindingPlugin.navigateToPoi({
+        id: POI_ID,
+        buildingId: BUILDING_ID,
+      });
+    }}
+    title="NAVIGATE TO POI"
+  />
+```
+
 ## API
 
 This plugin is just a (partial) wrapper over our native Android / iOS Situm WYF module. Therefore, you should take a look at [it's documentation](https://situm.com/docs/situm-wyf-introduction-requirements-code-examples-and-more) to have an understanding of how it works and the configurations that can be applied. You will also benefit from taking a look at our SDKs documentation, which Situm WYF uses heavily. Specifically, concepts about [positioning](https://situm.com/docs/mobile-sdks-positioning), [cartography](https://situm.com/docs/sdk-cartography), [routes](https://situm.com/docs/sdk-routes), [navigation](https://situm.com/docs/sdk-navigation) and [remote configuration](https://situm.com/docs/sdk-remote-configuration).
@@ -220,6 +240,14 @@ This plugin is just a (partial) wrapper over our native Android / iOS Situm WYF 
 | **`minZoom`** | `number` [15-21] | - | Minimum zoom level (user can't zoom out further). More [info](https://situm.com/docs/static-ui-settings/#zoom-level). |
 | **`maxZoom`** | `number` [15-21] | - | Maximum zoom level (user can't zoom in further). More [info](https://situm.com/docs/static-ui-settings/#zoom-level). |
 | **`useDashboardTheme`** | `boolean` | `true` | Use the primary color & logo of your organization as configured in Situm Dashboard. More [info](https://situm.com/docs/static-ui-settings/#accounts-name). |
+
+### `SitumWayfindingPlugin` methods
+
+| Method              | Parameters  | Description |
+| --------------------- | ----- | ---- |
+| **`navigateToPoi`** | `Poi` | Start navigation to the given `Poi`, starting at the current user location. |
+| **`stopNavigation`** | - | Stop navigation. |
+
 
 ### Callbacks
 
@@ -271,6 +299,13 @@ This plugin is just a (partial) wrapper over our native Android / iOS Situm WYF 
 | **`toFloorId`** | `String` | ID of the floor to which the user moved |
 | **`fromFloorName`** | `String` | Name of the floor from which the user moved |
 | **`toFloorName`** | `String` | Name of the floor to which the user moved |
+
+#### Poi
+
+|  Prop | Type | Description |
+| - | - | - |
+| **`id`** | `String` | ID of this point of interest |
+| **`buildingId`** | `String` | ID of the building where the POI is |
 
 #### Point
 

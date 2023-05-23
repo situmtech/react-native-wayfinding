@@ -48,10 +48,14 @@ public class MapView extends RelativeLayout implements SitumMapsListener,
   private boolean useDashboardTheme = true;
 
   private LibrarySettings librarySettings;
-  private SitumMapsLibrary mapsLibrary;
+  private static SitumMapsLibrary mapsLibrary;
 
   private ThemedReactContext context;
   private FragmentActivity activity;
+
+  public static SitumMapsLibrary library() {
+    return mapsLibrary;
+  }
 
   public MapView(Context context) {
     super(context);
