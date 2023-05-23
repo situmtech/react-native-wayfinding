@@ -46,6 +46,10 @@ export interface OnNavigationResult{
     navigation: Navigation
     error?: Error
 }
+export interface Poi {
+    id: String;
+    buildingId: String;
+}
 export interface MapViewProps {
     user: string;
     apikey: string;
@@ -60,7 +64,6 @@ export interface MapViewProps {
     onNavigationError?: (event: OnNavigationResult) => void;
     onNavigationFinished?: (event: OnNavigationResult) => void;
     style?: any;
-    iOSMapViewIndex?: string;
     enablePoiClustering?: boolean;
     showPoiNames?: boolean;
     useRemoteConfig?: boolean;

@@ -11,6 +11,7 @@
 		9505295F2889595F00AAF933 /* MapViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9505295E2889595F00AAF933 /* MapViewManager.swift */; };
 		95052961288959D400AAF933 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95052960288959D400AAF933 /* MapView.m */; };
 		9553EA1729781374007E7A98 /* SitReactMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9553EA1629781373007E7A98 /* SitReactMap.swift */; };
+		95D627B72A0A61E40054E44B /* SITCommManagerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D627B62A0A61E40054E44B /* SITCommManagerAdapter.swift */; };
 		F4FF95D7245B92E800C19C63 /* SitumWayfindingPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* SitumWayfindingPlugin.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		9505295E2889595F00AAF933 /* MapViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewManager.swift; sourceTree = "<group>"; };
 		95052960288959D400AAF933 /* MapView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
 		9553EA1629781373007E7A98 /* SitReactMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SitReactMap.swift; sourceTree = "<group>"; };
+		95D627B62A0A61E40054E44B /* SITCommManagerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SITCommManagerAdapter.swift; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* SitumWayfindingPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitumWayfindingPlugin.m; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* SitumWayfindingPlugin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SitumWayfindingPlugin-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* SitumWayfindingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SitumWayfindingPlugin.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				95D627B62A0A61E40054E44B /* SITCommManagerAdapter.swift */,
 				9553EA1629781373007E7A98 /* SitReactMap.swift */,
 				95052960288959D400AAF933 /* MapView.m */,
 				9505295E2889595F00AAF933 /* MapViewManager.swift */,
@@ -129,6 +132,7 @@
 			files = (
 				9553EA1729781374007E7A98 /* SitReactMap.swift in Sources */,
 				F4FF95D7245B92E800C19C63 /* SitumWayfindingPlugin.swift in Sources */,
+				95D627B72A0A61E40054E44B /* SITCommManagerAdapter.swift in Sources */,
 				95052961288959D400AAF933 /* MapView.m in Sources */,
 				9505295D2889595200AAF933 /* MapView.swift in Sources */,
 				9505295F2889595F00AAF933 /* MapViewManager.swift in Sources */,
