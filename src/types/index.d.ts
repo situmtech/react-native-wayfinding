@@ -61,7 +61,7 @@ export interface MapViewProps {
   user: string;
   apikey: string;
   googleApikey?: string;
-  buildingId: string;
+  buildingId?: string;
   building?: Building;
   onMapReady?: (event: WayfindingResult) => void;
   onFloorChanged?: (event: OnFloorChangedResult) => void;

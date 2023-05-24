@@ -167,8 +167,10 @@ export const MapView: React.FC<MapViewProps> = ({
       source={{
         uri: `${
           domain || SITUM_BASE_DOMAIN
-        }/?email=${user}&apikey=${apikey}&wl=true&global=true&hide=ni&mode=embed&buildingid=${
-          building?.buildingIdentifier
+        }/?email=${user}&apikey=${apikey}&wl=true&global=true&hide=ni&mode=embed
+        ${
+          currentBuilding.buildingIdentifier &&
+          `&buildingid=${currentBuilding.buildingIdentifier}`
         }`,
       }}
       style={{
