@@ -65,6 +65,10 @@ npm install https://github.com/situmtech/situm-react-native-wayfinding.git
 
 You may have warnings advicing you about a few peer dependencies, make sure you also install them via `npm install dependecy-name` or `yarn add dependency-name`
 
+```sh
+yarn add react-native-permissions react-native-situm-plugin react-native-webview
+```
+
 ### Situm repository (Android only)
 
 To allow Gradle to compile your Android application, add the Situm artifact repository to the `build.gradle` file at the root of your project:
