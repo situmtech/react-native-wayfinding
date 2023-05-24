@@ -122,13 +122,25 @@ Copy & paste this in your App.tsx or App.js file for a quick start!
 Minimal usage:
 
 ```js
+import React from 'react';
+import { MapView, SitumProvider } from '@situm/react-native-wayfinding';
+import { StyleSheet, View } from 'react-native';
+
 const SITUM_EMAIL = 'YOUR_EMAIL_HERE';
 const SITUM_API_KEY = 'YOUR_APIKEY_HERE';
 const SITUM_BUILDING_ID = 'YOUR_BUILDING_ID_HERE';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
 const App: React.FC = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <SitumProvider email={SITUM_EMAIL} apiKey={SITUM_API_KEY}>
         <MapView
           user={SITUM_EMAIL}
@@ -140,6 +152,7 @@ const App: React.FC = () => {
     </View>
   );
 };
+export default App;
 ```
 
 More elaborated usage:
