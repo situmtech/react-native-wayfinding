@@ -14,6 +14,7 @@ import {
   mapLocationToMessage,
   mapNavigationToMessage,
   mapDirectionsToMessage,
+  //mapInitialConfigurationToMessage,
 } from '../utils/mapper';
 import { MapViewProps } from '../types/index.d';
 
@@ -46,6 +47,15 @@ export const MapView: React.FC<MapViewProps> = ({
   buildingId,
   onPoiSelected = () => {},
   onError = () => {},
+  style,
+  //iOSMapViewIndex,
+  enablePoiClustering,
+  showPoiNames,
+  //useRemoteConfig,
+  minZoom,
+  maxZoom,
+  initialZoom,
+  useDashboardTheme,
 }) => {
   const webViewRef = useRef();
   // Local states
@@ -120,6 +130,33 @@ export const MapView: React.FC<MapViewProps> = ({
     sendMessageToViewer(webViewRef.current, mapDirectionsToMessage(directions));
   }, [directions]);
 
+  useEffect(() => {
+    // if (webViewRef.current && mapLoaded) {
+    //   sendMessageToViewer(
+    //     webViewRef.current,
+    //     mapInitialConfigurationToMessage(
+    //       style,
+    //       enablePoiClustering,
+    //       showPoiNames,
+    //       minZoom,
+    //       maxZoom,
+    //       initialZoom,
+    //       useDashboardTheme
+    //     )
+    //   );
+    // }
+  }, [
+    webViewRef,
+    mapLoaded,
+    style,
+    enablePoiClustering,
+    showPoiNames,
+    minZoom,
+    maxZoom,
+    initialZoom,
+    useDashboardTheme,
+  ]);
+
   const handleRequestFromViewer = (event: WebViewMessageEvent) => {
     const eventParsed = JSON.parse(event.nativeEvent.data);
     switch (eventParsed.type) {
@@ -128,6 +165,8 @@ export const MapView: React.FC<MapViewProps> = ({
           originId: JSON.parse(event.nativeEvent.data).payload.originId,
           destinationId: JSON.parse(event.nativeEvent.data).payload
             .destinationId,
+          directionsOptions: JSON.parse(event.nativeEvent.data).payload
+            .directionsOptions,
         });
         break;
       case 'navigation.requested':
@@ -135,6 +174,8 @@ export const MapView: React.FC<MapViewProps> = ({
           originId: JSON.parse(event.nativeEvent.data).payload.originId,
           destinationId: JSON.parse(event.nativeEvent.data).payload
             .destinationId,
+          directionsOptions: JSON.parse(event.nativeEvent.data).payload
+            .directionsOptions,
         });
         break;
       case 'navigation.stopped':
@@ -167,10 +208,8 @@ export const MapView: React.FC<MapViewProps> = ({
       source={{
         uri: `${
           domain || SITUM_BASE_DOMAIN
-        }/?email=${user}&apikey=${apikey}&wl=true&global=true&hide=ni&mode=embed
-        ${
-          currentBuilding.buildingIdentifier &&
-          `&buildingid=${currentBuilding.buildingIdentifier}`
+        }/?email=${user}&apikey=${apikey}&wl=true&global=true&mode=embed${
+          buildingId && `&buildingid=${buildingId}`
         }`,
       }}
       style={{

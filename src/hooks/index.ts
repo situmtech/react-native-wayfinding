@@ -247,7 +247,8 @@ const useSitum = () => {
   const requestDirections = async (
     building: Building,
     from: Position,
-    to: Position
+    to: Position,
+    directionsOptions?: any
   ): Promise<State['route']> => {
     console.debug('Requesting directions');
     const points = [
@@ -265,7 +266,7 @@ const useSitum = () => {
 
     return new Promise((resolve, reject) => {
       SitumPlugin.requestDirections(
-        [building, ...points],
+        [building, ...points, { ...directionsOptions }],
         (newRoute: State['route']) => {
           console.info('\u2713 Successfully computed route');
           resolve(newRoute);
@@ -281,10 +282,12 @@ const useSitum = () => {
   const calculateRoute = async ({
     originId,
     destinationId,
+    directionsOptions,
     updateRoute = true,
   }: {
     originId: number;
     destinationId: number;
+    directionsOptions?: any;
     updateRoute?: boolean;
   }) => {
     const poiOrigin = pois.find(
@@ -320,12 +323,13 @@ const useSitum = () => {
 
     // iOS workaround -> does not allow for several direction petitions
     setLockDirections(true);
-    return requestDirections(currentBuilding, from, to)
+    return requestDirections(currentBuilding, from, to, directionsOptions)
       .then((r: State['route']) => {
         const extendedRoute = {
           ...r,
           originId,
           destinationId,
+          type: directionsOptions?.accessibilityMode,
         };
         //@ts-ignore
         updateRoute && dispatch(setRoute(extendedRoute));
@@ -342,16 +346,19 @@ const useSitum = () => {
   const startNavigation = async ({
     originId,
     destinationId,
+    directionsOptions,
     navigationOptions,
   }: {
     originId: number;
     destinationId: number;
     navigationOptions?: any;
+    directionsOptions?: any;
     updateRoute?: boolean;
   }) => {
     calculateRoute({
       originId,
       destinationId,
+      directionsOptions,
       updateRoute: false,
     }).then((r) => {
       if (originId !== -1 || !location || !r) {

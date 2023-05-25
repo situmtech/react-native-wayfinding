@@ -27,3 +27,36 @@ export const mapNavigationToMessage = (navigation: Navigation) =>
 
 export const mapFollowUserToMessage = (follow: boolean) =>
   mapperWrapper('camera.follow_user', follow);
+
+export const mapInitialConfigurationToMessage = (
+  style: any,
+  enablePoiClustering: any,
+  showPoiNames: any,
+  minZoom: any,
+  maxZoom: any,
+  initialZoom: any,
+  useDashboardTheme: any
+) =>
+  mapperWrapper('ui.initial_configuration', {
+    ...(style && {
+      style: style,
+    }),
+    ...(enablePoiClustering && {
+      enablePoiClustering: enablePoiClustering,
+    }),
+    ...(showPoiNames && {
+      showPoiNames: showPoiNames,
+    }),
+    ...(minZoom && {
+      minZoom: minZoom,
+    }),
+    ...(maxZoom && {
+      maxZoom: maxZoom,
+    }),
+    ...(initialZoom && {
+      initialZoom: initialZoom,
+    }),
+    ...(useDashboardTheme && {
+      useDashboardTheme: useDashboardTheme,
+    }),
+  });
