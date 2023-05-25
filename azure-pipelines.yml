@@ -26,7 +26,7 @@ resources:
     name: situm/sys-kubernetes-templates.git
 
 steps:
-- ${{ if contains(variables['Build.SourceBranch'], 'release/') }}:
+- ${{ if contains(variables['Build.SourceBranch'], 'fix/') }}:
   - checkout: self
     fetchDepth: 1
     fetchTags: false
