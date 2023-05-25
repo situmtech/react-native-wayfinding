@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@situm/react-native-wayfinding": "/home/fran/Descargas/situm-react-native-wayfinding-v0.3.5.tgz",
+    "@situm/react-native-wayfinding": "0.3.0",
     "react": "18.2.0",
     "react-native": "0.71.8",
     "react-native-permissions": "^3.8.0",
