@@ -57,7 +57,7 @@ On the root folder of your project, execute:
 yarn add @situm/react-native-wayfinding
 ```
 
-or:
+or with yarn:
 
 ```sh
 npm install @situm/react-native-wayfinding

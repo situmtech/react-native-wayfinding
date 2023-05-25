@@ -1,5 +1,18 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
+
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import {
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  useColorScheme,
+} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import {
   MapView,
@@ -10,21 +23,15 @@ import {
   SitumProvider,
   WayfindingResult,
 } from '@situm/react-native-wayfinding';
-import { SITUM_API_KEY, SITUM_BUILDING_ID, SITUM_EMAIL } from './constants';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  mapview: {
-    width: '100%',
-    height: '100%',
-  },
-});
+import {SITUM_API_KEY, SITUM_BUILDING_ID, SITUM_EMAIL} from './constants';
 
 const App: React.FC = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
+
   const onMapReady = (event: WayfindingResult) => {
     console.log('Map is ready now' + JSON.stringify(event));
   };
@@ -58,7 +65,11 @@ const App: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={{...styles.container, ...backgroundStyle}}>
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={backgroundStyle.backgroundColor}
+      />
       <SitumProvider email={SITUM_EMAIL} apiKey={SITUM_API_KEY}>
         <MapView
           style={styles.mapview}
@@ -83,8 +94,18 @@ const App: React.FC = () => {
           useDashboardTheme={true}
         />
       </SitumProvider>
-    </View>
+    </SafeAreaView>
   );
 };
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  mapview: {
+    width: '100%',
+    height: '100%',
+  },
+});
 export default App;
