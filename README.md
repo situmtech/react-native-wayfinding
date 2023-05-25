@@ -54,13 +54,13 @@ First, you need to setup a React Native development environment. You will also n
 On the root folder of your project, execute:
 
 ```sh
-yarn add https://github.com/situmtech/situm-react-native-wayfinding.git
+yarn add react-native-situm-plugin
 ```
 
 or:
 
 ```sh
-npm install https://github.com/situmtech/situm-react-native-wayfinding.git
+npm install react-native-situm-plugin
 ```
 
 You may have warnings advicing you about a few peer dependencies, make sure you also install them via `npm install dependecy-name` or `yarn add dependency-name`
@@ -94,30 +94,6 @@ In order to work correctly the user will have to confirm the use of location and
 - In iOS, you will need to include a pair of keys and its descriptions on the Info.plist file of the native .xcworkspace project. See below:
   - NSLocationAlwaysAndWhenInUseUsageDescription : Location is required to find out where you are
   - NSBluetoothAlwaysUsageDescription : Bluetooth is required to find where you are
-
-### Configure Google Maps APIKEYs
-
-This plugin uses Google Maps as a base layer, on top of which everything else is drawn: floorplans, routes, user’s location… More concretely, it uses the Dynamic Maps service, which has a [generous free tier](https://developers.google.com/maps/billing-and-pricing/pricing#mobile-dynamic).
-
-First, you should create an API Key for your project. Then, on **Android** add the API Key to your “android/src/main/AndroidManifest.xml” file:
-
-```
-<?xml ...>
-<manifest ...>
-  <application
-  ...>
-
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="GOOGLE_MAPS_APIKEY" />
-
-    ...
-    <activity ...></activity>
-  </application>
-</manifest>
-```
-
-On **iOS** there is nothing else to do rather than including the Google Maps APIKEY on the Javascript side of the app (see below).
 
 ## Usage
 
@@ -214,7 +190,6 @@ export default function App() {
           style={styles.mapview}
           user="SITUM_USER" //Your Situm user account (e.g. user@email.com)
           apikey="SITUM_APIKEY" //Your Situm APIKEY
-          googleApikey="GOOGLE_MAPS_APIKEY" //Your Google APIKEY (see previous section)
           buildingId="BUILDING_ID" //The identifier of the building where you want to center the view (e.g. "1234")
           onMapReady={onMapReady} //Called when the maps is ready
           onFloorChanged={onFloorChanged} //Called when the user moves to another floor
@@ -260,7 +235,6 @@ This plugin is just a (partial) wrapper over our native Android / iOS Situm WYF 
 | ------------------------- | ---------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`user`**                | `string`         | -       | Your Situm user account (e.g. user@email.com)                                                                                                              |
 | **`apikey`**              | `string`         | -       | Your Situm [APIKEY](https://situm.com/docs/registration-account-management/#profile-manage-account-language-and-api-keys)                                  |
-| **`googleApikey`**        | `string`         | -       | Your Google APIKEY (see previous section)                                                                                                                  |
 | **`buildingId`**          | `string`         | -       | The identifier of the building where you want to center the view (e.g. "1234"). More [info](https://situm.com/docs/sdk-cartography/#sdk-buildings).        |
 | **`enablePoiClustering`** | `boolean`        | `true`  | Clusters close POIs together. More [info](https://situm.com/docs/static-ui-settings/#poi-clustering).                                                      |
 | **`showPoiNames`**        | `boolean`        | `true`  | Shows the POI name on top of each POI. More [info](https://situm.com/docs/static-ui-settings/#show-hide-poi-names).                                        |
