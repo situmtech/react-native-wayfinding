@@ -88,12 +88,15 @@ steps:
       echo -e "\n[+] Checkout and Pull to master branch\n"
       git checkout master
       git pull origin master
+
+      echo -e "\n[+] Install NPM dependencies\n"
+      npm install
  
       echo -e "\n[+] Configure NPM login"
       echo "//registry.npmjs.org/:_authToken=$(NPM_TOKEN)" > ~/.npmrc
  
       echo -e "\n[+] Publish NPM packages"
-      npm publish
+      npm publish --dry-run
  
     displayName: NPM publish
  
