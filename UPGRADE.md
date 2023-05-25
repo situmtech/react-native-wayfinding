@@ -6,11 +6,11 @@ In this file we share a way to upgrade previous versions of situm wayfinding plu
 
 ---
 
-## 0.2.X to 1.0.0 <a name="0.2.X-to-1.0.0"></a>
+## 0.3.X to 0.4.0 <a name="0.3.X-to-0.4.0"></a>
 
 - Update this plugin to 1.0.0 version on your package.json and install via npm or yarn.
 
-  ```yarn add @situm/react-native-wayfinding@^1.0.0```
+  ```yarn add @situm/react-native-wayfinding@^0.4.0```
 - Install our plugin peer dependencies, as React Native does not do it for you.
 
   ```yarn add react-native-permissions react-native-situm-plugin react-native-webview```

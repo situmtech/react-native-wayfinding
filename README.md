@@ -54,13 +54,13 @@ First, you need to setup a React Native development environment. You will also n
 On the root folder of your project, execute:
 
 ```sh
-yarn add react-native-situm-plugin
+yarn add @situm/react-native-wayfinding
 ```
 
 or:
 
 ```sh
-npm install react-native-situm-plugin
+npm install @situm/react-native-wayfinding
 ```
 
 You may have warnings advicing you about a few peer dependencies, make sure you also install them via `npm install dependecy-name` or `yarn add dependency-name`
