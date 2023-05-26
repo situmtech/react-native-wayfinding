@@ -33,27 +33,6 @@ In this file we share a way to upgrade previous versions of situm wayfinding plu
     ```
 
 ### Code example
-```js
-import
-
-const SITUM_EMAIL = 'YOUR_EMAIL_HERE';
-const SITUM_API_KEY = 'YOUR_APIKEY_HERE';
-const SITUM_BUILDING_ID = 'YOUR_BUILDING_ID_HERE';
-
-const App: React.FC = () => {
-  return (
-    <View>
-      <SitumProvider email={SITUM_EMAIL} apiKey={SITUM_API_KEY}>
-        <MapView
-          user={SITUM_EMAIL}
-          apikey={SITUM_API_KEY}
-          buildingId={SITUM_BUILDING_ID}
-          // other props
-        />
-      </SitumProvider>
-    </View>
-  );
-};
 
 ```js
 // your imports
