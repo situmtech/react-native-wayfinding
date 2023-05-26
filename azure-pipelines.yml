@@ -26,7 +26,7 @@ resources:
     name: situm/sys-kubernetes-templates.git
 
 steps:
-- ${{ if contains(variables['Build.SourceBranch'], 'fix/') }}:
+- ${{ if contains(variables['Build.SourceBranch'], 'release/') }}:
   - checkout: self
     fetchDepth: 1
     fetchTags: false
@@ -48,37 +48,37 @@ steps:
 
     displayName: Initial Vars & Configs
 
-      #  - bash: |
-      #
-      #      echo -e "\n[+] Setting NPM version to $(version)"
-      #      npm version $(version) --no-git-tag-version
-      #
-      #      echo -e "\n[+] Setting git to push NPM version\n"
-      #      git config --global user.email "sistemas@situm.es"
-      #      git config --global user.name "Situmops"
-      #
-      #      echo -e "\n[+] Fetch branches \n"
-      #      git fetch
-      #
-      #      echo -e "\n[+] Changing to $(currentBranch)"
-      #      git checkout $(currentBranch)
-      #
-      #      echo -e "\n[+] Add,Commit and Push to $(currentBranch)"
-      #      git commit -am "Setting the NPM version to $(version)"
-      #      git push --set-upstream origin $(currentBranch)
-      #      git push
-      #    displayName: Make changes
+  - bash: |
+
+      echo -e "\n[+] Setting NPM version to $(version)"
+      npm version $(version) --no-git-tag-version
+
+      echo -e "\n[+] Setting git to push NPM version\n"
+      git config --global user.email "sistemas@situm.es"
+      git config --global user.name "Situmops"
+
+      echo -e "\n[+] Fetch branches \n"
+      git fetch
+
+      echo -e "\n[+] Changing to $(currentBranch)"
+      git checkout $(currentBranch)
+
+      echo -e "\n[+] Add,Commit and Push to $(currentBranch)"
+      git commit -am "Setting the NPM version to $(version)"
+      git push --set-upstream origin $(currentBranch)
+      git push
+    displayName: Make changes
 
 
-      #  - template: azure-templates/publish_release.yml@sys_kubernetes_templates
-      #    parameters:
-      #      bitbucket:
-      #        bitbucket_user: situmops
-      #      system: "N/A"
-      #      server: "github"
-      #      mergeBranches:
-      #        - "master"
-      #        - "develop"
+  - template: azure-templates/publish_release.yml@sys_kubernetes_templates
+    parameters:
+      bitbucket:
+        bitbucket_user: situmops
+      system: "N/A"
+      server: "github"
+      mergeBranches:
+        - "master"
+        - "develop"
 
 
   - bash: |
@@ -96,7 +96,7 @@ steps:
       echo "//registry.npmjs.org/:_authToken=$(NPM_TOKEN)" > ~/.npmrc
 
       echo -e "\n[+] Publish NPM packages"
-      npm publish --dry-run
+      npm publish
 
     displayName: NPM publish
 
