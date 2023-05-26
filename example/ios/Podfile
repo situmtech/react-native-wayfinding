@@ -21,6 +21,11 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+permissions_path = '../node_modules/react-native-permissions/ios'
+pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways"
+pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
+pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}/BluetoothPeripheral"
+
 target 'SitumReactNativeWayfindingExample' do
   config = use_native_modules!
 
