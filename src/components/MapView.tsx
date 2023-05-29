@@ -51,7 +51,7 @@ export const MapView: React.FC<MapViewProps> = ({
   //iOSMapViewIndex,
   enablePoiClustering,
   showPoiNames,
-  //useRemoteConfig,
+  useRemoteConfig,
   minZoom,
   maxZoom,
   initialZoom,
@@ -92,6 +92,7 @@ export const MapView: React.FC<MapViewProps> = ({
       apiKey: apikey,
       withPosition: true,
       fetch: true,
+      useRemoteConfig,
     })
       .then(() => {
         console.info('SDK initialized successfully');

@@ -79,11 +79,13 @@ const useSitum = () => {
     apiKey,
     withPosition,
     fetch,
+    useRemoteConfig = true,
   }: {
     email?: string;
     apiKey?: string;
     withPosition?: boolean;
     fetch?: boolean;
+    useRemoteConfig?: boolean;
   }) =>
     new Promise<void>(async (resolve, reject) => {
       if (!isSdkInitialized) {
@@ -108,7 +110,7 @@ const useSitum = () => {
         }
       });
 
-      SitumPlugin.setUseRemoteConfig('true', () => {});
+      SitumPlugin.setUseRemoteConfig(`${useRemoteConfig}`, () => {});
 
       withPosition &&
         (await requestPermission()
