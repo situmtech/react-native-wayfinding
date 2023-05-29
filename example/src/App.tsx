@@ -1,20 +1,36 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { MapView, OnFloorChangedResult, OnNavigationResult, OnPoiDeselectedResult, OnPoiSelectedResult, WayfindingResult } from '@situm/react-native-wayfinding';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  mapview: {
-    width: '100%',
-    height: '100%',
-  },
-});
+import React from 'react';
+import {
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  useColorScheme,
+} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+
+import {
+  MapView,
+  OnFloorChangedResult,
+  OnNavigationResult,
+  OnPoiDeselectedResult,
+  OnPoiSelectedResult,
+  SitumProvider,
+  WayfindingResult,
+} from '@situm/react-native-wayfinding';
+import {SITUM_API_KEY, SITUM_BUILDING_ID, SITUM_EMAIL} from './constants';
 
 const App: React.FC = () => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
 
   const onMapReady = (event: WayfindingResult) => {
     console.log('Map is ready now' + JSON.stringify(event));
@@ -49,31 +65,47 @@ const App: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.mapview}
-        user="SITUM_USER"
-        apikey="SITUM_APIKEY"
-        googleApikey="GOOGLE_MAPS_APIKEY"
-        buildingId="PUT_THE_BUILDING_IDENTIFIER_HERE"
-        onMapReady={onMapReady}
-        onFloorChanged={onFloorChanged}
-        onPoiSelected={onPoiSelected}
-        onPoiDeselected={onPoiDeselected}
-        onNavigationRequested={onNavigationRequested}
-        onNavigationStarted={onNavigationStarted}
-        onNavigationError={onNavigationError}
-        onNavigationFinished={onNavigationFinished}
-        enablePoiClustering={true}
-        showPoiNames={true}
-        useRemoteConfig={true}
-        initialZoom={18} // Allowed range is [15-21]. Finally max(initialZoom, minZoom).
-        maxZoom={21} // [15-21]
-        minZoom={16} // [15-21]
-        useDashboardTheme={true}
+    <SafeAreaView style={{...styles.container, ...backgroundStyle}}>
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={backgroundStyle.backgroundColor}
       />
-    </View>
+      <SitumProvider email={SITUM_EMAIL} apiKey={SITUM_API_KEY}>
+        <MapView
+          style={styles.mapview}
+          user={SITUM_EMAIL}
+          apikey={SITUM_API_KEY}
+          googleApikey="GOOGLE_MAPS_APIKEY"
+          buildingId={SITUM_BUILDING_ID}
+          onMapReady={onMapReady}
+          onFloorChanged={onFloorChanged}
+          onPoiSelected={onPoiSelected}
+          onPoiDeselected={onPoiDeselected}
+          onNavigationRequested={onNavigationRequested}
+          onNavigationStarted={onNavigationStarted}
+          onNavigationError={onNavigationError}
+          onNavigationFinished={onNavigationFinished}
+          enablePoiClustering={true}
+          showPoiNames={true}
+          useRemoteConfig={true}
+          initialZoom={18} // Allowed range is [15-21]. Finally max(initialZoom, minZoom).
+          maxZoom={21} // [15-21]
+          minZoom={16} // [15-21]
+          useDashboardTheme={true}
+        />
+      </SitumProvider>
+    </SafeAreaView>
   );
 };
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  mapview: {
+    width: '100%',
+    height: '100%',
+  },
+});
 export default App;

@@ -68,3 +68,6 @@ lib/
 
 **/vendor/
 **/build/
+
+#auth
+example/src/constants.ts
