@@ -14,7 +14,7 @@ import {
   mapLocationToMessage,
   mapNavigationToMessage,
   mapDirectionsToMessage,
-  //mapInitialConfigurationToMessage,
+  mapInitialConfigurationToMessage,
 } from '../utils/mapper';
 import { MapViewProps } from '../types/index.d';
 
@@ -62,6 +62,7 @@ export const MapView: React.FC<MapViewProps> = ({
   const [mapLoaded, setMapLoaded] = useState<boolean>(false);
 
   const {
+    user: fullUser,
     location,
     directions,
     navigation,
@@ -131,20 +132,20 @@ export const MapView: React.FC<MapViewProps> = ({
   }, [directions]);
 
   useEffect(() => {
-    // if (webViewRef.current && mapLoaded) {
-    //   sendMessageToViewer(
-    //     webViewRef.current,
-    //     mapInitialConfigurationToMessage(
-    //       style,
-    //       enablePoiClustering,
-    //       showPoiNames,
-    //       minZoom,
-    //       maxZoom,
-    //       initialZoom,
-    //       useDashboardTheme
-    //     )
-    //   );
-    // }
+    if (webViewRef.current && mapLoaded) {
+      sendMessageToViewer(
+        webViewRef.current,
+        mapInitialConfigurationToMessage(
+          style,
+          enablePoiClustering,
+          showPoiNames,
+          minZoom,
+          maxZoom,
+          initialZoom,
+          useDashboardTheme
+        )
+      );
+    }
   }, [
     webViewRef,
     mapLoaded,
@@ -206,9 +207,9 @@ export const MapView: React.FC<MapViewProps> = ({
       //@ts-ignore
       ref={webViewRef}
       source={{
-        uri: `${
-          domain || SITUM_BASE_DOMAIN
-        }/?email=${user}&apikey=${apikey}&wl=true&global=true&mode=embed${
+        uri: `${domain || SITUM_BASE_DOMAIN}/?email=${fullUser?.email}&apikey=${
+          fullUser?.apiKey
+        }&wl=true&global=true&mode=embed${
           buildingId && `&buildingid=${buildingId}`
         }`,
       }}

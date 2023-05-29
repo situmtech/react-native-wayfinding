@@ -123,8 +123,6 @@ const App: React.FC = () => {
     <View style={styles.container}>
       <SitumProvider email={SITUM_EMAIL} apiKey={SITUM_API_KEY}>
         <MapView
-          user={SITUM_EMAIL}
-          apikey={SITUM_API_KEY}
           buildingId={SITUM_BUILDING_ID}
           // other props
         />

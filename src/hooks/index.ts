@@ -441,6 +441,7 @@ const useSitum = () => {
 
   return {
     // States
+    user,
     location,
     currentBuilding,
     buildings,

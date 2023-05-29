@@ -58,8 +58,8 @@ export interface OnNavigationResult {
 }
 export interface MapViewProps {
   domain?: string;
-  user: string;
-  apikey: string;
+  user?: string;
+  apikey?: string;
   googleApikey?: string;
   buildingId?: string;
   building?: Building;
