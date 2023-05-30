@@ -1,7 +1,8 @@
 import React, { createContext, useReducer } from 'react';
-import { createReducer } from './utils';
 //@ts-ignore
 import { Building, Poi } from 'react-native-situm-plugin';
+
+import { createReducer } from './utils';
 
 export interface Location {
   position?: Position;

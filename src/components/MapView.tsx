@@ -1,22 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Platform } from 'react-native';
 import WebView from 'react-native-webview';
-//@ts-ignore
-import { Building } from 'react-native-situm-plugin';
 import {
   WebViewErrorEvent,
   WebViewMessageEvent,
 } from 'react-native-webview/lib/WebViewTypes';
+
 //This icon should either be inside plugin or not be used rat all
 import useSitum from '../hooks';
+import { MapViewProps } from '../types/index.d';
 import {
+  mapDirectionsToMessage,
   mapFollowUserToMessage,
+  mapInitialConfigurationToMessage,
   mapLocationToMessage,
   mapNavigationToMessage,
-  mapDirectionsToMessage,
-  mapInitialConfigurationToMessage,
 } from '../utils/mapper';
-import { MapViewProps } from '../types/index.d';
 
 const SITUM_BASE_DOMAIN = 'https://map-viewer.situm.com';
 

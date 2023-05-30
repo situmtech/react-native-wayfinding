@@ -5,27 +5,27 @@ import SitumPlugin, {
   Poi,
   //@ts-ignore
 } from 'react-native-situm-plugin';
+
 import {
-  PositioningStatus,
-  Position,
-  State,
-  NavigationUpdateType,
-  NavigationStatus,
   Navigation,
+  NavigationStatus,
+  NavigationUpdateType,
+  Position,
+  PositioningStatus,
   selectIsSDKInitialized as selectIsSdkInitialized,
-  setSdkInitialized,
-  setAuth,
   selectUser,
+  setAuth,
+  setSdkInitialized,
+  State,
 } from '../store/index';
-import { useDispatch, useSelector } from '../store/utils';
 import {
   resetLocation,
   selectBuildings,
   selectCurrentBuilding,
+  selectDirections,
   selectLocation,
   selectNavigation,
   selectPois,
-  selectDirections,
   selectSubscriptionId,
   setBuildings,
   setCurrentBuilding,
@@ -36,6 +36,7 @@ import {
   setRoute,
   setSubscriptionId,
 } from '../store/index';
+import { useDispatch, useSelector } from '../store/utils';
 import requestPermission from '../utils/requestPermission';
 
 const defaultNavigationOptions = {

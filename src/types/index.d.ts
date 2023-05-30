@@ -9,47 +9,47 @@ interface MapViewError {
 }
 
 export interface WayfindingResult {
-  status: String;
-  message: String;
+  status: string;
+  message: string;
 }
 export interface OnPoiSelectedResult {
-  buildingId: String;
-  buildingName: String;
-  floorId: String;
-  floorName: String;
-  poiId: String;
-  poiName: String;
+  buildingId: string;
+  buildingName: string;
+  floorId: string;
+  floorName: string;
+  poiId: string;
+  poiName: string;
 }
 export interface OnPoiDeselectedResult {
-  buildingId: String;
-  buildingName: String;
+  buildingId: string;
+  buildingName: string;
 }
 export interface OnFloorChangedResult {
-  buildingId: String;
-  buildingName: String;
-  fromFloorId: String;
-  toFloorId: String;
-  fromFloorName: String;
-  toFloorName: String;
+  buildingId: string;
+  buildingName: string;
+  fromFloorId: string;
+  toFloorId: string;
+  fromFloorName: string;
+  toFloorName: string;
 }
 export interface Point {
-  buildingId: String;
-  floorId: String;
-  latitude: Number;
-  longitude: Number;
+  buildingId: string;
+  floorId: string;
+  latitude: number;
+  longitude: number;
 }
 export interface Error {
-  code: Number;
-  message: String;
+  code: number;
+  message: string;
 }
 export interface Destination {
-  category: String;
-  identifier?: String;
-  name?: String;
+  category: string;
+  identifier?: string;
+  name?: string;
   point: Point;
 }
 export interface Navigation {
-  status: String;
+  status: string;
   destination: Destination;
 }
 export interface OnNavigationResult {

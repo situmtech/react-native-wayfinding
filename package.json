@@ -29,6 +29,7 @@
   "scripts": {
     "test": "jest",
     "typescript": "tsc --noEmit",
+    "lint:fix": "eslint \"**/*.{js,ts,tsx}\" --fix",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepare": "bob build",
     "release": "release-it",
@@ -62,18 +63,21 @@
     "commitlint": "^17.6.3",
     "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-functional": "^5.0.8",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "jest": "^29.5.0",
     "pod-install": "^0.1.38",
     "prettier": "^2.8.8",
     "react": "18.2.0",
     "react-native": "0.71.8",
     "react-native-builder-bob": "^0.20.4",
-    "release-it": "^15.10.3",
-    "typescript": "^5.0.4",
     "react-native-permissions": "*",
     "react-native-situm-plugin": "0.0.27",
-    "react-native-webview": "*"
+    "react-native-webview": "*",
+    "release-it": "^15.10.3",
+    "typescript": "^5.0.4"
   },
   "resolutions": {
     "@types/react": "17.0.21"
@@ -87,11 +91,11 @@
     "react-native-webview": "*"
   },
   "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
     "react-native-permissions": "*",
     "react-native-situm-plugin": "0.0.27",
-    "react-native-webview": "*",
-    "react-native": "*",
-    "react": "*"
+    "react-native-webview": "*"
   },
   "jest": {
     "preset": "react-native",

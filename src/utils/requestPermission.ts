@@ -1,10 +1,10 @@
-import {
-  request,
-  PERMISSIONS,
-  RESULTS,
-  requestMultiple,
-} from 'react-native-permissions';
 import {Platform} from 'react-native';
+import {
+  PERMISSIONS,
+  request,
+  requestMultiple,
+  RESULTS,
+} from 'react-native-permissions';
 
 // TODO: can requestMultiple be used ?
 const checkIOSPermissions = async () => {
