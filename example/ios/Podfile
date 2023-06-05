@@ -27,7 +27,7 @@ target 'SitumWayfindingPluginExample' do
   # you should disable the next line.
   use_flipper!()
 
-  pod "SitumWayfinding", '0.19.3'
+  pod "SitumWayfinding", '0.19.4'
 
   post_install do |installer|
     react_native_post_install(installer)
