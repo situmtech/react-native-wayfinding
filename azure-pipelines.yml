@@ -37,11 +37,11 @@ steps:
       currentBranch=$(echo $(Build.SourceBranch) | cut -d "/" -f 3,4)
       echo "##vso[task.setvariable variable=currentBranch]$(echo $currentBranch)"
       echo -e "\n[+] Defined versions:"
-      echo -e "\t[+] NPM cli version: $(npm --version)" 
+      echo -e "\t[+] NPM cli version: $(npm --version)"
       echo -e "\t[+] React Native Plugin version: ${{ parameters.RNVersion }}"
       echo -e "\t[+] Current branch: $currentBranch"
 
-        
+
       echo -e "\n[+] Setting git remote credentials\n"
       git remote set-url origin https://situmops:$(github_token)@github.com/$(Build.Repository.Name).git
       cat .git/config
@@ -79,22 +79,25 @@ steps:
       mergeBranches:
         - "master"
         - "develop"
-     
+
 
   - bash: |
       echo -e "\n[+] Fetch all branches\n"
       git fetch
- 
+
       echo -e "\n[+] Checkout and Pull to master branch\n"
       git checkout master
       git pull origin master
- 
+
+      echo -e "\n[+] Install NPM dependencies\n"
+      npm install
+
       echo -e "\n[+] Configure NPM login"
       echo "//registry.npmjs.org/:_authToken=$(NPM_TOKEN)" > ~/.npmrc
- 
+
       echo -e "\n[+] Publish NPM packages"
       npm publish
- 
+
     displayName: NPM publish
- 
- 
+
+
