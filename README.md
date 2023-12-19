@@ -17,6 +17,10 @@ Integrate plug&play navigation experience with floorplans, POIs, routes and turn
 
 </div>
 
+> [!IMPORTANT]  
+> This guide refers to the old version of the Wayfinding module, which is **no longer maintained**. We strongly recommend adopting [MapView](https://developers.situm.com/sdk_documentation/react-native/typedoc/functions/mapview), the new visual component available at [@situm/react-native](https://github.com/situmtech/react-native).
+To stay up to date, checkout the [React Native SDK Changelog](https://situm.com/docs/react-native-sdk-changelog/) and visit the [migration guide](https://situm.com/docs/react-native-wayfinding-migration-guide/) to ease the transition to the new library.
+
 ## Introduction <a name="introduction"></a>
 
 Situm SDK is a set of utilities that allow any developer to build location based apps using Situm's indoor positioning system. 
